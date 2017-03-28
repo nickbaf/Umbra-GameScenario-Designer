@@ -1,0 +1,353 @@
+body, select {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+body{
+    display:block;
+    backround-color :rgb(245,245,245);
+    margin:0;
+}
+
+
+/*TOP BLUE LINE + APP AND PROJECT NAME*/
+#topNav{
+    overflow: hidden;
+    list-style-type: none;
+    background-color: rgb(0,188,212);
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height:100%;
+    width: 100%;
+    box-shadow: 1px 1px 2px gray;
+}
+#topNav li{
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+#projectName{
+
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size:100%;
+    margin-bottom: 10px;
+   margin-left:30%;
+    margin-top: 10px;
+    padding-top:5px;
+    /*text-shadow: 2px 1px black;*/
+    text-transform: uppercase;
+
+}
+#topMenu{
+
+    color: white;
+    letter-spacing: 2px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size:100%;
+    text-decoration: none;
+    padding-bottom: 5px;
+    padding-right: 1px;
+    padding-left:3px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right:10%;
+    /*text-shadow: 2px 1px black;*/
+    text-transform: uppercase;
+   /* box-shadow: 2px 2px 2px black;*/
+}
+#topMenu img{
+    margin-top:4px;
+    padding-right:20px;
+    padding-left: 10px;
+
+}
+/*END OF BLUE LINE*/
+
+/*NAV MENU*/
+#nav li a {
+    display: block;
+    color: #000;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 140%;
+    text-align: center;
+    padding: 15px 16px;
+    text-decoration: none;
+}
+#nav img{
+    height: 10%;
+}
+#nav li a.active {
+    background-color: #86d5f8;
+    color: dodgerblue;
+}
+#nav li a.active,img{
+    color:#86d5f8;
+}
+
+#nav li a.active {
+    background-color: lightgrey;
+    color: dodgerblue;
+}
+.active{
+    box-shadow: 2px 2px 2px rgb(240,240,240);
+}
+#nav {
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 13%;
+    background-color: white;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    box-shadow: 3px 3px 3px rgb(240,240,240);
+}
+
+
+/*MODELS */
+#charactermodel ,#storychart {
+    margin-top: 1px;
+    position: absolute;
+   /* padding-bottom: 20px;*/
+    left: 14.1%;
+    width: 85.9%;
+    height: 92.5%;
+   /* border: 2px solid black;*/
+}
+
+
+
+#nodeOperation,#edgeOperation {
+    font-size: 28px;
+}
+#node-popUp {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: none;
+    position: absolute;
+    top: 350px;
+    left: 770px;
+    z-index: 299;
+    width: 300px;
+    height: 200px;
+    background-color: rgb(250,250,250);
+    border-style: groove;
+    border-width: 5px;
+    border-color: #5394ed;
+    padding: 10px;
+    text-align: center;
+}
+#edge-popUp {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: none;
+    position: absolute;
+    top: 450px;
+    left: 770px;
+    z-index: 299;
+    width: 250px;
+    height: 120px;
+    background-color: rgb(250,250,250);
+    border-style: groove;
+    border-width: 3px;
+    border-color: #5394ed;
+    padding: 10px;
+    text-align: center;
+}
+
+#buttons{
+    position:fixed;
+    text-align: center;
+    left:30%;
+    top:250px;
+    font-family: 'Gloria Hallelujah', cursive;
+
+
+
+}
+
+/*HOME SCREEN ASSETS*/
+h1{
+    position:fixed;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 3em;
+    text-shadow: 2px 1px rgb(84, 126, 140);
+    opacity: 0.7;
+    left:30%;
+    top:7%;
+}
+
+.namesPane {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: none;
+    position: fixed;
+    /*top: 450px;
+    left: 770px;*/
+    left:50%;
+    top:40%;
+    z-index: 299;
+    width: 250px;
+    height: 80px;
+    background-color: rgb(250,250,250);
+    border-style: groove;
+    border-width: 5px;
+    border-color: #5394ed;
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+.button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 350px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+
+#blackout {
+    width:100%;
+    height:100%; /* make sure you have set parents to a height of 100% too*/
+    position: absolute;
+    left:0; top:0;
+    z-index:10 /*just to make sure its on top*/}
+
+
+footer{
+    position:fixed;
+    bottom:1%;
+    left:5px;
+}
+
+input[type=file] {
+    width: 1px;
+    visibility: hidden;
+    left:50%;
+}
+
+
+
+
+
+/*SIDENAV*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: rgb(240,240,240);
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 90px;
+    box-shadow: 20px 2px 2px red;/*doesnt work :( */
+
+}
+
+.sidenav a {
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: rgb(22,175,202);
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+
+#title {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:20px;
+    padding-left: 30px;
+    position: fixed;
+    margin:0;
+    margin-bottom: 20px;
+    top: 15px;
+    box-shadow: #1c1c1c;
+}
+#sidetitle{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+    padding-left: 30px;
+    position: fixed;
+    padding-bottom: 40px;
+    top: 30px;
+}
+
+.line-separator{
+
+    height:0.2px;
+
+    background:#717171;
+
+    border-bottom:1px solid #313030;
+
+}
+
+#properties{
+
+}
+/* END OF SIDENAV */
+
+
+
+
+
+
+
