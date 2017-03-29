@@ -895,6 +895,7 @@ function insertCharName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
         document.getElementById("newCharPane").style.display = 'none';
         document.getElementById("cname").value = "New Project";
         document.getElementById('blackout').style.display = 'none';
+        openCharTab(tempName);
 
     }else if(type=="cancel"){
         document.getElementById("newCharPane").style.display = 'none';
@@ -937,7 +938,7 @@ function insertFlowName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
         document.getElementById("newStoryPane").style.display = 'none';
         document.getElementById("sfname").value = "New Project";
         document.getElementById('blackout').style.display = 'none';
-
+        openStoryTab(tempName);
     } else if (type == "cancel") {
         document.getElementById("newStoryPane").style.display = 'none';
         document.getElementById("sfname").value = "New Project";
