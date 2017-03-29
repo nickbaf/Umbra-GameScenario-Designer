@@ -17,20 +17,144 @@
 
 
 </head>
-<body onload="mainTab();">
+<body onload="">
 <?php include("menu.php") ?>
 
 
 <!-- HOME SCREEN ASSETS -->
 
 
-<h1>Welcome to Untitled Thesis Web Application</h1>
+<table id="theTable">
+    <tr>
+        <td>
+<table class="metricTable" style="margin:auto;">
+    <tr>
+        <th class="bigone">Re-playability</th>
+    </tr>
+    <tr>
+        <td >Number of Choices- NoC</td>
+        <td>NaN</td>
+    </tr>
+    <tr>
+        <td >Number of Ends- NoE</td>
+        <td>NaN</td>
+    </tr>
+</table>
+        </td>
+        <td>
+<table class="metricTable" style="margin:auto;">
+    <tr>
+        <th class="bigone">Interactivity</th>
+    </tr>
+    <tr>
+        <td >Number of Importand Choices- NIC</td>
+        <td>NaN</td>
+    </tr>
+    <tr>
+        <td >Average Choice Importance- ACI</td>
+        <td>NaN</td>
+    </tr>
+    <tr>
+        <td >Average Paths after Importand Choices -APIC</td>
+        <td>NaN</td>
+    </tr>
+</table>
+        </td>
+        <td>
+            <table class="metricTable" style="margin:auto;">
+                <tr>
+                    <th class="bigone">Characters' Interaction</th>
+                </tr>
+                <tr>
+                    <td >Characters Coupling Factor- CCF</td>
+                    <td>NaN</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="metricTable" style="margin:auto;">
+                <tr>
+                    <th class="bigone">Content</th>
+                </tr>
+                <tr>
+                    <td >Number of Actions- NoA</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Number of Choices- NoC</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Number of Goals- NoG</td>
+                    <td>NaN</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="metricTable" style="margin:auto;">
+                <tr>
+                    <th class="bigone">Achieved Duriosity</th>
+                </tr>
+                <tr>
+                    <td >Number of Choices- NoC</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Number of Ends- NoE</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Average Paths to Happy Endings- APHE</td>
+                    <td>NaN</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="metricTable" style="margin:auto;">
+                <tr>
+                    <th class="bigone">Achieved Duriosity</th>
+                </tr>
+                <tr>
+                    <td >Number of Choices- NoC</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Number of Ends- NoE</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Average Paths to Happy Endings- APHE</td>
+                    <td>NaN</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="metricTable" style="margin:auto;">
+                <tr>
+                    <th class="bigone">Desirability</th>
+                </tr>
+                <tr>
+                    <td >Number of Actions- NoA</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Average Paths after Choices- APC</td>
+                    <td>NaN</td>
+                </tr>
+                <tr>
+                    <td >Average Distance Between Choices- ADbC</td>
+                    <td>NaN</td>
+                </tr>
+            </table>
+        </td>
 
 
+    </tr>
+</table>
 
-
-
-
+<h2 id="metricsTitle">Metrics about story ταδε..</h2>
 
 
 

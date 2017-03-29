@@ -346,8 +346,16 @@ input[type=file] {
 /* END OF SIDENAV */
 
 
+/*METRICS STYLE*/
 
+#theTable{
+position: fixed;
+    left:20%;
+}
+.metricTable{
+    padding: 20px;
+}
 
-
-
-
+#theTable tr td{
+    padding: 10px;
+}
