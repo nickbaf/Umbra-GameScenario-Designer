@@ -24,6 +24,7 @@ var modelName;
 
 var charModels=[];
 var storyModels=[];
+var metrics=[];
 //FILE IO
 var reader = new FileReader();
 
@@ -387,6 +388,7 @@ function init(type) {
     if(type=="char"){
         writeActiveTabs("char");
         writeTabs("story");
+        writeTabs("metrics");
         document.getElementById("projectName").innerHTML=sessionStorage.getItem("ProjectTitle");
         modelName=sessionStorage.getItem("modelName");
         document.getElementById("char"+modelName).className="active";
@@ -401,6 +403,7 @@ function init(type) {
     else if(type=="story"){
         writeActiveTabs("story");
         writeTabs("char");
+        writeTabs("metrics");
         document.getElementById("projectName").innerHTML=sessionStorage.getItem("ProjectTitle");
         modelName=sessionStorage.getItem("storyName");
         document.getElementById("story"+modelName).className="active";
@@ -408,6 +411,17 @@ function init(type) {
         document.getElementById("storyflow").className="sub-menu collapse in";
         document.getElementById("storyflow").setAttribute("aria-expanded",true);
         draw();
+    }else if(type=="metric"){
+        writeActiveTabs("metrics");
+        writeTabs("story");
+        writeTabs("char");
+        document.getElementById("projectName").innerHTML=sessionStorage.getItem("ProjectTitle");
+        modelName=sessionStorage.getItem("metricName");
+        document.getElementById("metric"+modelName).className="active";
+        document.getElementById("tab3").className="active";
+        document.getElementById("metrics").className="sub-menu collapse in";
+        document.getElementById("metrics").setAttribute("aria-expanded",true);
+        computeMetrics(); //TODO
     }
 }
 
@@ -806,6 +820,19 @@ function saveEdgeData(data,callback) {
     console.log('########');
 }
 
+//METRICS COMPUTE AND ANALYSIS
+
+function computeMetrics() {
+    //TODO
+}
+
+
+
+
+
+
+
+
 //HTML UI-UX Script
 /**
  * Functions for the User Interface and User EXperience.
@@ -821,6 +848,7 @@ function mainTab() {
         document.getElementById("projectName").innerHTML="Current Project: "+sessionStorage.getItem("ProjectTitle");
         writeTabs("char");
         writeTabs("story");
+        writeTabs("metrics");
 
     }else {
         document.getElementById("saveData").style.display = 'none';
@@ -828,8 +856,9 @@ function mainTab() {
         document.getElementById("tab1").style.display = 'none';
         document.getElementById("tab2").style.display = 'none';
         document.getElementById("tab3").style.display = 'none';
-        charModels=[]
-        storyModels=[]
+        charModels=[];
+        storyModels=[];
+        metrics=[];
     }
     document.getElementById('upload').addEventListener('change',function () {
         reader.readAsText(document.getElementById("upload").files[0]);
@@ -920,7 +949,7 @@ function insertFlowName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
         storyModels.push(tempName);
         sessionStorage.setItem("storyModels", JSON.stringify(storyModels));
 
-
+        //Flow Chart
         var el = document.createElement("a");
         el.appendChild(document.createTextNode(tempName));
         var oncl = "openStoryTab('";
@@ -934,6 +963,23 @@ function insertFlowName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
         child.appendChild(el);
         child.setAttribute("id", "story" + tempName);
         temp.insertBefore(child, par);
+
+        //Metrics
+        metrics.push(tempName);
+        sessionStorage.setItem("metrics", JSON.stringify(storyModels));
+        var el = document.createElement("a");
+        el.appendChild(document.createTextNode(tempName));
+        var oncl = "openMetricsTab('";
+        oncl = oncl.concat(tempName.toString());
+        oncl = oncl.concat("');");
+        console.log(oncl);
+        el.setAttribute("onclick", oncl);
+        var temp = document.getElementById("metrics");
+        var child = document.createElement("li");
+        child.appendChild(el);
+        child.setAttribute("id", "metric" + tempName);
+        temp.appendChild(child);
+
 
         document.getElementById("newStoryPane").style.display = 'none';
         document.getElementById("sfname").value = "New Project";
@@ -1026,6 +1072,15 @@ function openActiveTab(type,name) {
         document.getElementById("storyflow").className="sub-menu collapse in";
         document.getElementById("storyflow").setAttribute("aria-expanded",true);
         draw();
+    }else if(type=="metric"){
+        document.getElementById("metric"+sessionStorage.getItem("metricName")).className="";
+        sessionStorage.setItem("metricName",name);
+        document.getElementById("projectName").innerHTML=sessionStorage.getItem("ProjectTitle"); //put char model here
+        modelName=name;
+        document.getElementById("metric"+modelName).className="active";
+        document.getElementById("metrics").className="sub-menu collapse in";
+        document.getElementById("metrics").setAttribute("aria-expanded",true);
+
     }
 
 

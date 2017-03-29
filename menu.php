@@ -48,7 +48,7 @@
                     <a href="#"><img src="img/network/mush.png" alt="" align="bottom" style="width:35px;height:28px; padding-left: 3px; padding-right: 3px;">  Metrics <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="metrics">
-                    <li ><a href="#">Metrics</a></li>
+                    <!--li ><a href="#">Metrics</a></li-->
                 </ul>
 
             </ul>

@@ -38,6 +38,13 @@ function openStoryTab(name) {
     window.location="flowchart.php"; //redirects user
 
 }
+
+function openMetricsTab(name) {
+    sessionStorage.setItem("metricName",name); //sets the variable in order to open the correct model
+    window.location="metrics.php"; //redirects user
+}
+
+
 /**
  * This function creates the tabs in the left side menu
  * @param type -char, write the character model tabs.-story, write the story tabs
@@ -80,6 +87,23 @@ function writeTabs(type) {
             child.appendChild(el);
             child.setAttribute("id", "story" + tempName);
             temp.insertBefore(child, par);
+        }
+    }else if(type=="metrics" && (sessionStorage.getItem("metrics")!=null)){
+        metrics = JSON.parse(sessionStorage.getItem("metrics"));
+        for (i = 0; i < metrics.length; i++) {
+            var tempName = metrics[i];
+            var el = document.createElement("a");
+            el.appendChild(document.createTextNode(tempName));
+            var oncl = "openMetricsTab('";
+            oncl = oncl.concat(tempName.toString());
+            oncl = oncl.concat("');");
+            console.log(oncl);
+            el.setAttribute("onclick", oncl);
+            var temp = document.getElementById("metrics");
+            var child = document.createElement("li");
+            child.appendChild(el);
+            child.setAttribute("id", "metric" + tempName);
+            temp.appendChild(child);
         }
     }
 }
@@ -130,5 +154,23 @@ function writeActiveTabs(type) { //na ginei gia story also
             temp.insertBefore(child, par);
         }
 
+    }else if(type=="metrics"){
+        console.log("writing metrics active tabs");
+        metrics = JSON.parse(sessionStorage.getItem("metrics"));
+        for (i = 0; i < metrics.length; i++) {
+            var tempName = metrics[i];
+            var el = document.createElement("a");
+            el.appendChild(document.createTextNode(tempName));
+            var oncl = "openActiveTab('metric','"; //this function refers to coreApp.js
+            oncl = oncl.concat(tempName.toString());
+            oncl = oncl.concat("');");
+            console.log(oncl);
+            el.setAttribute("onclick", oncl);
+            var temp = document.getElementById("metrics");
+            var child = document.createElement("li");
+            child.appendChild(el);
+            child.setAttribute("id", "metric" + tempName);
+            temp.appendChild(child);
+        }
     }
 }

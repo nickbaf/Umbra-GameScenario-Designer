@@ -17,7 +17,7 @@
 
 
 </head>
-<body onload="">
+<body onload="init('metric');">
 <?php include("menu.php") ?>
 
 
