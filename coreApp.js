@@ -55,6 +55,7 @@ reader.onload = function(e) {
         var c = storage[0];
         var charModels = [];
         var storyModels = [];
+        var metrics=[];
         var step = 1;
         for (i = 0; i < c; i++) {
            // alert(storage[step]);
@@ -70,6 +71,7 @@ reader.onload = function(e) {
         for (i = 0; i < s; i++) {
           //  alert(storage[step]);
             storyModels.push(storage[step]);
+            metrics.push(storage[step]);
             if (storage[step + 1] != null) {
                 sessionStorage.setItem("storyData" + storage[step], storage[step + 1]);
             }
@@ -77,6 +79,7 @@ reader.onload = function(e) {
         }
         sessionStorage.setItem("charModels", JSON.stringify(charModels));
         sessionStorage.setItem("storyModels", JSON.stringify(storyModels));
+        sessionStorage.setItem("metrics", JSON.stringify(metrics));
         sessionStorage.setItem("ProjectTitle", storage[step]);
         mainTab();
         window.location.reload();
@@ -421,6 +424,10 @@ function init(type) {
         document.getElementById("tab3").className="active";
         document.getElementById("metrics").className="sub-menu collapse in";
         document.getElementById("metrics").setAttribute("aria-expanded",true);
+        var temp=JSON.parse(sessionStorage.getItem("storyData"+modelName));
+        nodes=temp.nodes;
+        edges=temp.edges;
+        count=nodes.length;
         computeMetrics(); //TODO
     }
 }
@@ -430,7 +437,7 @@ function init(type) {
  * Function for saving the current story model into the sessionStorage
  */
 function saveStorage(){
-    sessionStorage.removeItem("storyData");
+    sessionStorage.removeItem("storyData"+modelName);
     var nds=[];
     var edg=[];
     for(i=0;i<nodes.length;i++){
@@ -519,7 +526,8 @@ function draw() {
     var container = document.getElementById('storychart');
     var options = {
         physics:{
-           /* barnesHut: {
+            enabled:false,
+            /*barnesHut: {
                 gravitationalConstant: -2000,
                 centralGravity: 0.3,
                 springLength: 550,
@@ -527,10 +535,18 @@ function draw() {
                 //damping: 0.09,
                 avoidOverlap: 1,
             }*/
+            /*forceAtlas2Based: {
+                gravitationalConstant: -50,
+                centralGravity: 0.01,
+                springConstant: 0.08,
+                springLength: 100,
+                damping: 0.4,
+                avoidOverlap: 1
+            },*/
 
         },
         layout: {
-            randomSeed: undefined,
+            randomSeed: 3,
             improvedLayout:false,
             hierarchical: {
                 enabled:true,
@@ -676,14 +692,19 @@ function saveNodeData(data, callback) {
     var checkedValue = $('#nodeFix:checked').val();
     if(checkedValue){
         data.physics=false;
+        data.fixed={
+            x:true,
+            y:true
+        };
     }else{
         data.physics=true;
+        data.fixed={
+            x:false,
+            y:false
+        };
     }
     data.shadow=false;
-    data.fixed={
-        x:false,
-            y:false
-    };
+
 
     if(shape=="Choice"){
         data.type="Choice";
@@ -753,7 +774,7 @@ function saveNodeData(data, callback) {
         };
     }
     else if(shape=="Narrative"){
-        data.type="Goal";
+        data.type="Narrative";
         data.shape="box";
         data.widthConstraint={
             widthConstraint: true,
@@ -794,6 +815,10 @@ function saveEdgeData(data,callback) {
     data.label=document.getElementById("edge-label").value;
     clearPopUp();
     data.length=150+2*data.label.length;
+    data.smooth={
+        enabled:false,
+
+    };
     if (data.from == data.to) {
         var r = confirm("Do you want to connect the node to itself?");
         if (r == true) {
@@ -824,6 +849,30 @@ function saveEdgeData(data,callback) {
 
 function computeMetrics() {
     //TODO
+    /**
+     * Metrics that require cardinality
+     */
+    var rep=numberOfMetrics(nodes);
+    document.getElementById("noc").innerHTML=rep["noC"];
+    document.getElementById("noe").innerHTML=rep["noE"];
+
+    document.getElementById("noa").innerHTML=rep["noA"];
+    document.getElementById("noc2").innerHTML=rep["noC"];
+    document.getElementById("nog").innerHTML=rep["noG"];
+
+    document.getElementById("noe2").innerHTML=rep["noE"];
+    document.getElementById("noc3").innerHTML=rep["noC"];
+    document.getElementById("noa2").innerHTML=rep["noA"];
+    rep=aphe(nodes,edges);
+    document.getElementById("aphe").innerHTML=rep["apHE"];
+
+    rep=apc(nodes,edges);
+    document.getElementById("apc").innerHTML=rep["apC"];
+
+
+
+
+    //CCF
 }
 
 

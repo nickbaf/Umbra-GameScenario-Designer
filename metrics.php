@@ -9,6 +9,7 @@
     <script src="jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="coreApp.js"></script>
     <script type="text/javascript" src="tabManagment.js"></script>
+    <script type="text/javascript" src="metricsCalc.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-Side menu icons-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -33,11 +34,11 @@
     </tr>
     <tr>
         <td >Number of Choices- NoC</td>
-        <td>NaN</td>
+        <td id="noc">NaN</td>
     </tr>
     <tr>
         <td >Number of Ends- NoE</td>
-        <td>NaN</td>
+        <td id="noe">NaN</td>
     </tr>
 </table>
         </td>
@@ -80,53 +81,34 @@
                 </tr>
                 <tr>
                     <td >Number of Actions- NoA</td>
-                    <td>NaN</td>
+                    <td id="noa">NaN</td>
                 </tr>
                 <tr>
                     <td >Number of Choices- NoC</td>
-                    <td>NaN</td>
+                    <td id="noc2">NaN</td>
                 </tr>
                 <tr>
                     <td >Number of Goals- NoG</td>
-                    <td>NaN</td>
+                    <td id="nog">NaN</td>
                 </tr>
             </table>
         </td>
         <td>
             <table class="metricTable" style="margin:auto;">
                 <tr>
-                    <th class="bigone">Achieved Duriosity</th>
+                    <th class="bigone">Achieved Curiosity</th>
                 </tr>
                 <tr>
                     <td >Number of Choices- NoC</td>
-                    <td>NaN</td>
+                    <td id="noc3">NaN</td>
                 </tr>
                 <tr>
                     <td >Number of Ends- NoE</td>
-                    <td>NaN</td>
+                    <td id="noe2">NaN</td>
                 </tr>
                 <tr>
                     <td >Average Paths to Happy Endings- APHE</td>
-                    <td>NaN</td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table class="metricTable" style="margin:auto;">
-                <tr>
-                    <th class="bigone">Achieved Duriosity</th>
-                </tr>
-                <tr>
-                    <td >Number of Choices- NoC</td>
-                    <td>NaN</td>
-                </tr>
-                <tr>
-                    <td >Number of Ends- NoE</td>
-                    <td>NaN</td>
-                </tr>
-                <tr>
-                    <td >Average Paths to Happy Endings- APHE</td>
-                    <td>NaN</td>
+                    <td id="aphe">NaN</td>
                 </tr>
             </table>
         </td>
@@ -137,11 +119,11 @@
                 </tr>
                 <tr>
                     <td >Number of Actions- NoA</td>
-                    <td>NaN</td>
+                    <td id="noa2">NaN</td>
                 </tr>
                 <tr>
                     <td >Average Paths after Choices- APC</td>
-                    <td>NaN</td>
+                    <td id="apc">NaN</td>
                 </tr>
                 <tr>
                     <td >Average Distance Between Choices- ADbC</td>
