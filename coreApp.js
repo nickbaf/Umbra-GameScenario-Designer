@@ -27,6 +27,7 @@ var storyModels=[];
 var metrics=[];
 //FILE IO
 var reader = new FileReader();
+var forkWeights=[];
 
 /**
  * Function that handles uploaded file
@@ -424,11 +425,13 @@ function init(type) {
         document.getElementById("tab3").className="active";
         document.getElementById("metrics").className="sub-menu collapse in";
         document.getElementById("metrics").setAttribute("aria-expanded",true);
-        var temp=JSON.parse(sessionStorage.getItem("storyData"+modelName));
-        nodes=temp.nodes;
-        edges=temp.edges;
-        count=nodes.length;
-        computeMetrics(); //TODO
+        if(sessionStorage.getItem("storyData"+modelName)!=null) {
+            var temp = JSON.parse(sessionStorage.getItem("storyData" + modelName));
+            nodes = temp.nodes;
+            edges = temp.edges;
+            count = nodes.length;
+            computeMetrics(); //TODO
+        }
     }
 }
 
@@ -680,6 +683,31 @@ function draw() {
         openNav();
     }
     });
+    if(forkWeights.length>0) {
+        network.on("afterDrawing", function (ctx) {
+            ctx.font = "17px Helvetica";
+            for (i = 0; i < forkWeights.length; i++) {
+                for(var k=0;k<nodes.length;k++) {
+                    if (nodes[k].id == forkWeights[i]["id"]) {
+
+                    var nodeId = nodes[k].id;
+                    var nodePosition = network.getPositions(nodes[k].id);
+                    /**
+                     * printing its line in the appropriate coordinates
+                     *
+                     */
+                    ctx.fillText(forkWeights[i]["w"], nodePosition[nodeId].x, nodePosition[nodeId].y);
+
+
+                    //ctx.fill();
+                }
+                }
+            }
+            ctx.fill();
+
+
+        });
+    }
 }
 /**
  * Function for saving a story's flow chart node
@@ -852,27 +880,36 @@ function computeMetrics() {
     /**
      * Metrics that require cardinality
      */
-    var rep=numberOfMetrics(nodes);
-    document.getElementById("noc").innerHTML=rep["noC"];
-    document.getElementById("noe").innerHTML=rep["noE"];
+    //try {
+        var rep = numberOfMetrics(nodes);
+        document.getElementById("noc").innerHTML = rep["noC"];
+        document.getElementById("noe").innerHTML = rep["noE"];
 
-    document.getElementById("noa").innerHTML=rep["noA"];
-    document.getElementById("noc2").innerHTML=rep["noC"];
-    document.getElementById("nog").innerHTML=rep["noG"];
+        document.getElementById("noa").innerHTML = rep["noA"];
+        document.getElementById("noc2").innerHTML = rep["noC"];
+        document.getElementById("nog").innerHTML = rep["noG"];
 
-    document.getElementById("noe2").innerHTML=rep["noE"];
-    document.getElementById("noc3").innerHTML=rep["noC"];
-    document.getElementById("noa2").innerHTML=rep["noA"];
-    rep=aphe(nodes,edges);
-    document.getElementById("aphe").innerHTML=rep["apHE"];
+        document.getElementById("noe2").innerHTML = rep["noE"];
+        document.getElementById("noc3").innerHTML = rep["noC"];
+        document.getElementById("noa2").innerHTML = rep["noA"];
+        rep = aphe(nodes, edges);
+        document.getElementById("aphe").innerHTML = rep["apHE"];
 
-    rep=apc(nodes,edges);
-    document.getElementById("apc").innerHTML=rep["apC"];
+        rep = apc(nodes, edges);
+        document.getElementById("apc").innerHTML = rep["apC"];
 
-
-
+        findWeights(nodes, edges);
+   /* }catch (err){
+        console.log("Invalid graph");
+        alert(err);
+    }*/
 
     //CCF
+}
+
+function sideWeight() {
+    forkWeights=findWeights(nodes, edges);
+    draw();
 }
 
 

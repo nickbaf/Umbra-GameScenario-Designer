@@ -15,6 +15,7 @@
         <script type="text/javascript" src="vis.js"></script>
         <script src="jquery-3.2.0.min.js"></script>
         <script type="text/javascript" src="coreApp.js"></script>
+    <script type="text/javascript" src="metricsCalc.js"></script>
         <script type="text/javascript" src="tabManagment.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="vis-network.min.css" rel="stylesheet" type="text/css" />
@@ -88,43 +89,7 @@ include("menu.php") ?>
 
 <div id="storychart"></div>
 
-    <span id="spanNav" style="font-size:20px;position:absolute;top:10px;right:25px;cursor:pointer" onclick="openNav()">
-        <img src="img/network/gear.png" alt="" align="left"  style="width:35px;height:35px;"></span>
-
-    <div id="mySidenav" class="sidenav">
-        <p class="sidenavTitle" id="title">Customizer (TODO)</p>
-        <p class="sidenavTitle" id="sidetitle">Customize your Network prefrences</p>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="line-separator"></div>
-        <a href="#">About</a>
-        <a href="#">Network Physics</a>
-        <a href="#">Other info (TBD)</a>
-        <br>
-        <div id="properties" style="display: none">
-            <span>Node Properties</span>
-            <br>
-            <table style="margin:auto;">
-                <tr>
-                    <td>ID:</td>
-                    <td id="propertyID">id</td>
-                </tr>
-                <tr>
-                    <td>Node Type:</td>
-                    <td id="propertyType">type</td>
-                </tr>
-                <tr>
-                    <td>Info:</td>
-                    <td id="propertyInfo">info</td>
-                </tr>
-
-
-            </table>
-
-
-        </div>
-    </div>
-    <span id="spanNav" style="font-size:20px;position:absolute;top:10px;right:25px;cursor:pointer" onclick="openNav()">
-        <img src="img/network/gear.png" alt="" align="left"  style="width:35px;height:35px;"></span>
+<?php include("sideNav.php") ?>
 
     <div class="namesPane" id="newCharPane">
         <span>New Character Model Name</span>
