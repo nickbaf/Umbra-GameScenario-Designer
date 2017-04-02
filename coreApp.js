@@ -552,7 +552,7 @@ function draw() {
             randomSeed: 3,
             improvedLayout:false,
             hierarchical: {
-                enabled:true,
+                enabled:false,
                 levelSeparation: 150,
                 nodeSpacing: 100,
                 treeSpacing: 200,
@@ -590,7 +590,7 @@ function draw() {
                 document.getElementById('node-id').value = data.id ;//++count;
                 document.getElementById('node-id').disabled=true;
                 document.getElementById('node-label').value = ++count;
-                document.getElementById('node-type').value ="Start";
+                //document.getElementById('node-type').value ="Start";
                 document.getElementById('nodeSaveButton').onclick = saveNodeData.bind(this, data, callback);
                 document.getElementById('nodeCancelButton').onclick = clearPopUp.bind();
                 document.getElementById('node-popUp').style.display = 'block';
@@ -608,13 +608,14 @@ function draw() {
                 document.getElementById('node-popUp').style.display = 'block';
             },
             addEdge : function(data, callback) {
-                document.getElementById('edgeOperation').innerHTML = "Add Edge";
+               /* document.getElementById('edgeOperation').innerHTML = "Add Edge";
                 document.getElementById('edge-id').value =data.from+" "+data.to;
                 document.getElementById('edge-id').disabled=true;
                 document.getElementById('edge-label').value = "";
                 document.getElementById('edgeSaveButton').onclick = saveEdgeData.bind(this, data, callback);
                 document.getElementById('edgeCancelButton').onclick = cancelEdit.bind(this, callback);
-                document.getElementById('edge-popUp').style.display = 'block';
+                document.getElementById('edge-popUp').style.display = 'block';*/
+                saveEdgeData(data, callback);
 
             },
             editEdge : function (data,callback) {
@@ -636,9 +637,10 @@ function draw() {
                 }
                 saveStorage();
                 console.log(JSON.stringify(nodes));
+                console.log("After="+network.body.data.edges.length);
             },
             deleteEdge: function (data,callback) { //the data vairable contains the id data.edges [0]
-                console.log(data.edges);
+                console.log("Previous"+edges.length);
                 callback(data);
                 //edges.remove(data.edges);
                 for(i=0;i<edges.length;i++){
@@ -647,7 +649,7 @@ function draw() {
                     }
                 }
                 saveStorage();
-                console.log(JSON.stringify(edges));
+
             }
 
         }
@@ -908,7 +910,7 @@ function computeMetrics() {
 }
 
 function sideWeight() {
-    forkWeights=findWeights(nodes, edges);
+    forkWeights=findWeights(nodes,edges);
     draw();
 }
 

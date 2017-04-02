@@ -78,7 +78,7 @@ include("menu.php") ?>
                 </tr>
                 <tr>
                     <td>label</td><td>
-                    <input id="edge-label" value="new value" />
+                    <input id="edge-label" value="" />
                 </td>
                 </tr>
             </table>

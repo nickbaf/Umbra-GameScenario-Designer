@@ -94,10 +94,10 @@ function findWeights(theNodes,theEdges){
             forks.push(nodes[i].id);
         }
     }
-    alert(forks[0]);
+   // alert(forks[0]);
     compute(forks[0]);
     sessionStorage.setItem("forks",JSON.stringify(wForks));
-    alert(JSON.stringify(wForks));
+   // alert(JSON.stringify(wForks));
     for(i=0;i<wForks.length;i++){
         console.log(wForks[i]);
     }
@@ -108,18 +108,37 @@ function findWeights(theNodes,theEdges){
  *
  * @param fork, a choice node
  */
-function compute(fork){
+var checked=[];
+function compute(fork,previousNode){
+    console.log("begin=="+toLabel(fork));
     if(exists(fork)==false) {
         var t = getNodeType(fork);
         //console.log(t);
         if (t == "Good Ending" || t == "Bad Ending") {
             // alert("end");
-            return {w: 5, type: "ending"};
+            var visit=[];
+            visit.push(fork);
+            console.log(toLabel(fork)+" is visited");
+            checked.push(fork);
+            return {w: 5, type: "ending",path:visit};
         } else if (t == "Narrative" || t == "Goal") {
             // alert("narrative or goal");
-            return compute(getDestinations(fork)); //narrative or goal have only 1 destination
+            //put a try-catch if u find a narrative alone without destination
+            var r=getDestinations(fork);
+           /* for(var l=0;l<checked.length;l++){
+                if (checked[l]==r){
+
+                }
+            }*/
+            var temp=compute(r,fork); //narrative or goal have only 1 destination
+            console.log(getDestinations(fork).length);
+            temp["path"].push(fork);
+            //console.log(temp);
+            console.log(toLabel(fork)+" is visited with path length "+temp["path"].length);
+            return temp;
 
         } else if (t == "Choice") {
+
             var r = getDestinations(fork);
             var i;
             var topResult = [];
@@ -128,81 +147,144 @@ function compute(fork){
             for (i = 0; i < r.length; i++) {
                 // alert("compute!!");
                 //if(exists(r[i])==false) {
-                    topResult.push(compute(r[i]));
+                    topResult.push(compute(r[i],null));
                 //}
             }
 
             for(i=0;i<nodes.length;i++){
                 if(nodes[i].id==fork){
-                    console.log(nodes[i].label+" =="+netWeight);
-                    console.log(topResult.length);
+                   // console.log(nodes[i].label+" =="+netWeight);
+                   // console.log(topResult.length);
                     break;
                 }
             }
 
 
            // alert(topResult.length);
+            var visit=[];
+            var flag=false;
+            var returned;
+            console.log("In fork no."+toLabel(fork));
+            console.log("evaluating "+topResult.length);
             for (i = 0; i < topResult.length; i++) {
-               // alert(topResult[i]["type"]);
+                console.log("path weight=="+topResult[i]["w"]+' type=='+topResult[i]["type"]);
+                for(var s=0;s<topResult[i]["path"].length;s++){
+                    visit.push(topResult[i]["path"][s]);
+                }
+                //visit.concat(topResult[i]["path"]);
+                if(topResult[i]["returned"]!=null){
+                    flag=true;
+                    returned=topResult[i]["returned"];
+
+
+                  //  console.log("RETURNEDD FROM "+toLabel(returned));
+                }
                 if (topResult[i]["w"] == 5 && topResult[i]["type"]=="ending") { //fork leads directly to an end.
                     flagEnding = true;
                     netWeight=5;
                 }
             }
-            for (i = 0; i < topResult.length; i++) {
-                if (topResult[i]["w"] == 5 && topResult[i]["type"] == "fork") {
-                    if (flagEnding) {
-                        netWeight = 4;
-                    } else {
-                        netWeight = 2;
+            //visit.push(previousNode);
+            visit.push(fork);
+            if (flag){
+                console.log("found a return node");
+                var count=0;
+               /* for (i = 0; i < topResult.length; i++) {
+                    for(m=0;m<topResult[i]["path"].length;m++){
+                        if(topResult[i]["path"][m]==returned){
+                            flag=false;
+                            netWeight=1;
+                        }
                     }
-                } else if (topResult[i]["w"] == 4 && topResult[i]["type"] == "fork") {
-                    if (flagEnding) {
-                        netWeight = 3;
-                    } else {
-                        netWeight = 2;
+                }*/
+               console.log(toLabel(fork)+" looking for=="+toLabel(returned));
+               for(var m=0;m<visit.length;m++){
+                  // console.log(toLabel(visit[m]));
+                   if(visit[m].toString()==returned.toString()){
+                       count++;
+                       console.log("count");
+                   }
+               }
+               //console.log("____");
+               if(count>1){
+                   flag=false;
+                   console.log("FOUND"+toLabel(fork));
+                   netWeight=1;
+               }
+            }else{
+                flag=true;
+            }
+
+            if(flag) {
+                for (i = 0; i < topResult.length; i++) {
+                    if (topResult[i]["w"] == 5 && topResult[i]["type"] == "Choice") {
+                        if (flagEnding) {
+                            netWeight = 4;
+                        } else {
+                            netWeight = 2;
+                        }
+                    } else if (topResult[i]["w"] == 4 /*&& topResult[i]["type"] == "fork"*/) {
+                        if (flagEnding) {
+                            netWeight = 3;
+                        } else {
+                            netWeight = 2;
+                        }
+                    } else if (topResult[i]["w"] == 3 /*&& topResult[i]["type"] == "fork"*/) {
+                        console.log("bika");
+                        if (flagEnding) {
+                            netWeight = 3;
+                        } else {
+                            netWeight = 2;
+                        }
+                    } else if (topResult[i]["w"] == 2 /*&& topResult[i]["type"] == "fork"*/) { //TBD
+                        if (flagEnding) {
+                            netWeight = 3;
+                        } else {
+                            netWeight = 2;
+                        }
                     }
-                } else if (topResult[i]["w"] == 3 && topResult[i]["type"] == "fork") {
-                    if (flagEnding) {
-                        netWeight = 3;
-                    } else {
-                        netWeight = 2;
-                    }
-                }
-                else if (topResult[i]["w"] == 1 && topResult[i]["type"] == "fork") {
-                    if (flagEnding) {
-                        netWeight = 3;
-                    } else {
-                        netWeight = 2;
+                    else if (topResult[i]["w"] == 1 /*&& topResult[i]["type"] == "fork"*/) {
+                        if (flagEnding) {
+                            netWeight = 3;
+                        } else {
+                            netWeight = 2;
+                        }
                     }
                 }
             }
-            if(netWeight==-1){
-                netWeight=1;
+            if(netWeight==-1){ //will be deleted oncy the changes are implemented
+                //alert('FAULT');
+               // netWeight=1;
             }
-            if (exists(fork) == false) {
-                wForks.push({id: fork, w: netWeight});
+
+            if (exists(fork) == false) { //maybe this is obsolete
+                wForks.push({id: fork, w: netWeight,path:visit});
             }
             for(i=0;i<nodes.length;i++){
                 if(nodes[i].id==fork){
-                      console.log(nodes[i].label+" =="+netWeight);
-                      console.log("**********");
+                    //  console.log(nodes[i].label+" =="+netWeight);
+                     // console.log("**********");
                       for(var k=0;k<topResult.length;k++){
-                          console.log(topResult[k]["w"]+" "+topResult[k]["type"]);
+                       //   console.log(topResult[k]["w"]+" "+topResult[k]["type"]);
                       }
-                      console.log("---------------");
+                     // console.log("---------------");
                     break;
                 }
             }
-
-            return {w: netWeight, type: "fork"};
+            console.log(toLabel(fork)+" is visited with path legnth "+visit.length);
+            if(flag){
+                console.log("Didn't found two paths to-"+toLabel(returned)+" sending onwards...")
+                return {w: netWeight, type: "Choice",path:visit,returned:returned};
+            }
+            return {w: netWeight, type:"Choice",path:visit};
 
         }
     }else{
-        console.log("there is"+fork);
+        console.log("the node has been visited..we have a no.1 fork among us "+ toLabel(fork));
         for(i=0;i<wForks.length;i++){
             if(wForks[i]["id"]==fork.toString()){
-                return {w:wForks[i]["w"] , type: getNodeType(fork)};
+                //returned is the node that has been visited again
+                return {w:wForks[i]["w"] , type: getNodeType(fork),path:wForks[i]["path"],returned:fork};
             }
         }
     }
@@ -238,4 +320,12 @@ function exists(id) {
         }
     }
     return false;
+}
+
+function toLabel(fork) {
+    for(i=0;i<nodes.length;i++){
+        if(nodes[i].id==fork) {
+            return nodes[i].label;
+        }
+    }
 }
