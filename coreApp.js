@@ -552,7 +552,7 @@ function draw() {
             randomSeed: 3,
             improvedLayout:false,
             hierarchical: {
-                enabled:false,
+                enabled:true,
                 levelSeparation: 150,
                 nodeSpacing: 100,
                 treeSpacing: 200,
@@ -906,6 +906,8 @@ function computeMetrics() {
         document.getElementById("nic").innerHTML = rep["niC"];
         document.getElementById("aci").innerHTML = rep["acI"];
         document.getElementById("apic").innerHTML = rep["apIC"];
+        document.getElementById("projectName").innerHTML+="  ---   Metrics for "+sessionStorage.getItem("metricName");
+        document.getElementById("metricsTitle").innerHTML="Metrics for "+sessionStorage.getItem("metricName");
    /* }catch (err){
         console.log("Invalid graph");
         alert(err);

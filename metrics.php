@@ -136,7 +136,7 @@
     </tr>
 </table>
 
-<h2 id="metricsTitle">Metrics about story ταδε..</h2>
+<h2 id="metricsTitle" style="position: fixed; bottom: 30%; left: 50%;">Metrics about story ταδε..</h2>
 
 
 
