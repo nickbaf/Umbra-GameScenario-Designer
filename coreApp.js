@@ -552,7 +552,7 @@ function draw() {
             randomSeed: 3,
             improvedLayout:false,
             hierarchical: {
-                enabled:true,
+                enabled:false,
                 levelSeparation: 150,
                 nodeSpacing: 100,
                 treeSpacing: 200,
@@ -678,7 +678,7 @@ function draw() {
         var node = network.body.data.nodes.get(nodeid);
         // alert(node.id);
         document.getElementById("properties").style.display = "block";
-        document.getElementById("propertyID").innerHTML = node.id;
+        document.getElementById("propertyID").innerHTML = toLabel(node.id);
         document.getElementById("propertyType").innerHTML = node.type;
         document.getElementById("propertyInfo").innerHTML = node.info;
         //display the fork's weight in later version
@@ -901,6 +901,11 @@ function computeMetrics() {
         document.getElementById("apc").innerHTML = rep["apC"];
 
         findWeights(nodes, edges);
+
+        rep=choiceMetrics(edges);
+        document.getElementById("nic").innerHTML = rep["niC"];
+        document.getElementById("aci").innerHTML = rep["acI"];
+        document.getElementById("apic").innerHTML = rep["apIC"];
    /* }catch (err){
         console.log("Invalid graph");
         alert(err);

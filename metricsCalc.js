@@ -85,6 +85,30 @@ function getStartPointEdges(edges,id) {
     return r;
 }
 
+function choiceMetrics(edges) {
+    var w5=0;
+    var apIC=0;
+    var aci=0;
+    for(var i=0;i<wForks.length;i++){
+        aci+=wForks[i]["w"];
+        if(wForks[i]["w"]==5){
+            w5++;
+           apIC+=getStartPointEdges(edges,wForks[i]["id"]);
+        }
+    }
+    var temp1=aci/wForks.length;
+    var temp2=apIC/w5;
+    return{acI:Math.round(temp1*100)/100,apIC:Math.round(temp2*100)/100,niC:w5}
+}
+
+
+function ccf() {
+   // var name=sessionStorage.getItem("metricName");
+    //if(sessionStorage.getItem("charData"+name))
+    //TODO
+
+}
+
 function findWeights(theNodes,theEdges){
     edges=theEdges;
     nodes=theNodes;
@@ -118,7 +142,7 @@ function findWeights(theNodes,theEdges){
     for(i=0;i<wForks.length;i++){
         console.log(wForks[i]);
     }
-    alert(wForks.length);
+   // alert(wForks.length);
     return wForks;
 }
 /**
@@ -152,10 +176,19 @@ function compute(fork,previousNode){
             temp["path"].push(fork);
             //console.log(temp);
             console.log(toLabel(fork)+" is visited with path length "+temp["path"].length);
+            checked.push(fork);
             return temp;
 
         } else if (t == "Choice") {
-
+            for(var i=0;i<checked.length;i++){
+                if(checked[i]==fork){
+                    var temp=[];
+                    temp.push(fork);
+                    console.log("Found loop at "+toLabel(fork));
+                    return {w:-1,type:"Choice",path:temp};
+                }
+            }
+            checked.push(fork);
             var r = getDestinations(fork);
             var i;
             var topResult = [];
@@ -216,7 +249,7 @@ function compute(fork,previousNode){
                             console.log("count");
                         }
                     }
-                    if(count>1){
+                    if(count==topResult.length){ //count>1
                         flag=false;
                         console.log("FOUND"+toLabel(returned[g]));
                         returned.splice(g,1);
@@ -266,18 +299,28 @@ function compute(fork,previousNode){
                         } else {
                             netWeight = 2;
                         }
+                    }else if(topResult[i]["w"] == -1 /*&& topResult[i]["type"] == "fork"*/){
+                        if (flagEnding) {
+                            netWeight = 3;
+                        } else {
+                           // alert("oki@"+toLabel(fork));
+                            netWeight = 1;
+                           // break;
+                        }
                     }
                 }
             }
-            if(netWeight==-1){ //will be deleted oncy the changes are implemented
+            if(netWeight==-1){ //will be deleted once the changes are implemented
+
                 //alert('FAULT');
                // netWeight=1;
             }
 
 
 
-            if (exists(fork) == false) { //maybe this is obsolete
+            if (exists(fork) == false) {
                 wForks.push({id: fork, w: netWeight,path:visit});
+
             }
             for(i=0;i<nodes.length;i++){
                 if(nodes[i].id==fork){
@@ -288,6 +331,11 @@ function compute(fork,previousNode){
                       }
                      // console.log("---------------");
                     break;
+                }
+            }
+            for(var i=0;i<checked.length;i++){
+                if(checked[i]==fork){
+                    checked.splice(i,1);
                 }
             }
             console.log(toLabel(fork)+" is visited with path legnth "+visit.length);

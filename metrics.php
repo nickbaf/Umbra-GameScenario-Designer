@@ -49,15 +49,15 @@
     </tr>
     <tr>
         <td >Number of Importand Choices- NIC</td>
-        <td>NaN</td>
+        <td id="nic">NaN</td>
     </tr>
     <tr>
         <td >Average Choice Importance- ACI</td>
-        <td>NaN</td>
+        <td id="aci">NaN</td>
     </tr>
     <tr>
         <td >Average Paths after Importand Choices -APIC</td>
-        <td>NaN</td>
+        <td id="apic">NaN</td>
     </tr>
 </table>
         </td>
@@ -68,7 +68,7 @@
                 </tr>
                 <tr>
                     <td >Characters Coupling Factor- CCF</td>
-                    <td>NaN</td>
+                    <td id="ccf">NaN</td>
                 </tr>
             </table>
         </td>
