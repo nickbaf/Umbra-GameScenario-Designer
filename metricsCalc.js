@@ -145,13 +145,25 @@ function findWeights(theNodes,theEdges){
    // alert(wForks.length);
     return wForks;
 }
+var bug=false;
+/**
+ * function for printing debug messages in console
+ * @param msg
+ */
+function debug(msg) {
+    if(bug) {
+        console.log(msg);
+    }
+
+}
 /**
  *
  * @param fork, a choice node
  */
 var checked=[];
+bug=true;
 function compute(fork,previousNode){
-    console.log("begin=="+toLabel(fork));
+    debug("Started Node="+toLabel(fork));
     if(exists(fork)==false) {
         var t = getNodeType(fork);
         //console.log(t);
@@ -159,7 +171,8 @@ function compute(fork,previousNode){
             // alert("end");
             var visit=[];
             visit.push(fork);
-            console.log(toLabel(fork)+" is visited");
+            debug("Visited Ending="+toLabel(fork));
+            debug("#######\n\n");
             checked.push(fork);
             return {w: 5, type: "ending",path:visit};
         } else if (t == "Narrative" || t == "Goal") {
@@ -175,7 +188,10 @@ function compute(fork,previousNode){
             console.log(getDestinations(fork).length);
             temp["path"].push(fork);
             //console.log(temp);
-            console.log(toLabel(fork)+" is visited with path length "+temp["path"].length);
+            //console.log(toLabel(fork)+" is visited with path length "+temp["path"].length);
+            debug("Visited Narrative || Goal="+toLabel(fork))
+            debug("Length to nearest ending="+temp["path"].length);
+            debug("#######\n\n");
             checked.push(fork);
             return temp;
 
@@ -184,7 +200,9 @@ function compute(fork,previousNode){
                 if(checked[i]==fork){
                     var temp=[];
                     temp.push(fork);
-                    console.log("Found loop at "+toLabel(fork));
+                    //console.log("Found loop at "+toLabel(fork));
+                    debug("Found loop while acessing node="+toLabel(fork));
+                    debug("#######\n\n");
                     return {w:-1,type:"Choice",path:temp};
                 }
             }
@@ -208,11 +226,11 @@ function compute(fork,previousNode){
             var flag=false;
             var flagFound=false;
             var returned=[];
-            console.log("In fork no."+toLabel(fork));
-            console.log("evaluating "+topResult.length);
-
+            debug("In fork no="+toLabel(fork));
+            debug("Node has edges== "+topResult.length);
+            debug("=============FORKS=============");
             for (i = 0; i < topResult.length; i++) {
-                console.log("path weight=="+topResult[i]["w"]+' type=='+topResult[i]["type"]);
+                debug("fork weight=="+topResult[i]["w"]+' type=='+topResult[i]["type"]);
                 for(var s=0;s<topResult[i]["path"].length;s++){
                     visit.push(topResult[i]["path"][s]);
                 }
@@ -221,7 +239,7 @@ function compute(fork,previousNode){
                     flag=true;
                     for(var e=0;e<topResult[i]["returned"].length;e++){
                         returned.push(topResult[i]["returned"][e]);
-                        console.log("found a return node, new length=="+returned.length);
+                        debug("found a return node,  length=="+returned.length);
                     }
 
 
@@ -235,13 +253,15 @@ function compute(fork,previousNode){
                     netWeight=5;
                 }
             }
+            debug("=============END=============\n\n");
             //visit.push(previousNode);
             visit.push(fork);
             //FINDING DUPLICATES
+            debug("=============FINDING NO 1=============");
             if (flag){
                 var count=0;
                 for(var g=0;g<returned.length;g++){
-                    console.log(toLabel(fork)+" looking for=="+toLabel(returned[g]));
+                    debug(toLabel(fork)+" looking for=="+toLabel(returned[g]));
                     for(var m=0;m<visit.length;m++){
                         // console.log(toLabel(visit[m]));
                         if(visit[m].toString()==returned[g].toString()){
@@ -249,12 +269,16 @@ function compute(fork,previousNode){
                             console.log("count");
                         }
                     }
-                    if(count==topResult.length){ //count>1
+                    console.log("have="+topResult.length+"need="+count);
+                    if(count>=topResult.length){ //count>1 //==
                         flag=false;
                         console.log("FOUND"+toLabel(returned[g]));
                         returned.splice(g,1);
-
-                        netWeight=1;
+                        if(flagEnding){
+                            netWeight=3;
+                        }else {
+                            netWeight = 1;
+                        }
                     }else {
                         flagFound=true;
                     }
@@ -263,7 +287,7 @@ function compute(fork,previousNode){
             }else{
                 flag=true;
             }
-
+            debug("=============END NO 1=============");
             //EVALUATION PROCESS
             if(flag) {
                 for (i = 0; i < topResult.length; i++) {
@@ -338,9 +362,9 @@ function compute(fork,previousNode){
                     checked.splice(i,1);
                 }
             }
-            console.log(toLabel(fork)+" is visited with path legnth "+visit.length);
+            console.log(toLabel(fork)+" is visited with path length "+visit.length);
             if(returned.length>0){
-                console.log("Didn't found two paths to-"+toLabel(returned)+" sending onwards...")
+                console.log("Didn't found two paths to-"+returned+" sending onwards...")
                 return {w: netWeight, type: "Choice",path:visit,returned:returned};
             }
             return {w: netWeight, type:"Choice",path:visit};
