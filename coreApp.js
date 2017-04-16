@@ -217,6 +217,16 @@ function charDraw() {
                         console.log(cNodes.length);
                     }
                 }
+                /**
+                 * if a node gets deleted,its edges must be deleted too
+                 */
+                for(i=0;i<cEdges.length;i++){
+                    if(cEdges[i].from==data.nodes[0]){
+                        cEdges.splice(i,1);
+                    }else if(cEdges[i].to==data.nodes[0]){
+                        cEdges.splice(i,1);
+                    }
+                }
                 saveCharStorage();
                 console.log(JSON.stringify(cNodes));
             },
@@ -635,6 +645,16 @@ function draw() {
                         nodes.splice(i,1);
                     }
                 }
+                /**
+                 * if a node gets deleted,its edges must be deleted too
+                 */
+                for(i=0;i<edges.length;i++){
+                    if(edges[i].from==data.nodes[0]){
+                        edges.splice(i,1);
+                    }else if(edges[i].to==data.nodes[0]){
+                        edges.splice(i,1);
+                    }
+                }
                 saveStorage();
                 console.log(JSON.stringify(nodes));
                 console.log("After="+network.body.data.edges.length);
@@ -669,7 +689,7 @@ function draw() {
 
     }
     /**
-     * Function that handles the doulbe click inside the camvas.If
+     * Function that handles the doulbe click inside the canvas.If
      * the event returns a node display his attributes in the right side Customizer.
      */
     network.on('doubleClick',function (evnt) {
@@ -704,6 +724,7 @@ function draw() {
                     //ctx.fill();
                 }
                 }
+                //splice here for performance improvement
             }
             ctx.fill();
 
@@ -918,6 +939,7 @@ function computeMetrics() {
 
 function sideWeight() {
     forkWeights=findWeights(nodes,edges);
+    destroy();
     draw();
 }
 
@@ -970,6 +992,18 @@ function insertName(type) {
         document.getElementById('blackout').style.display = 'block';
         document.getElementById("newProjectPane").style.display = 'block';
     }else if(type=="save"){
+        var flag=false;
+        if(sessionStorage.getItem("ProjectTitle")!=null){
+            var r = confirm("There is already an open project.\nHit Cancel and save the changes or OK to proceed.");
+            if (r == false) {
+                document.getElementById('blackout').style.display = 'none';
+                document.getElementById("name").value = "New Project";
+                document.getElementById("newProjectPane").style.display = 'none';
+                return;
+            }else{
+                flag=true;
+            }
+        }
         document.getElementById("projectName").innerHTML=document.getElementById("name").value;
         sessionStorage.clear();
         sessionStorage.setItem("ProjectTitle",document.getElementById("name").value);
@@ -980,6 +1014,9 @@ function insertName(type) {
         document.getElementById("newProjectPane").style.display = 'none';
         document.getElementById("name").value = "New Project";
         document.getElementById('blackout').style.display = 'none';
+        if(flag){
+            location.reload();
+        }
     }else if(type=="cancel"){
         document.getElementById("newProjectPane").style.display = 'none';
         document.getElementById("name").value = "New Project";
@@ -1098,15 +1135,31 @@ function ultimaSave() {
     var storage=[];
     var c=JSON.parse(sessionStorage.getItem("charModels")); //charModels is a stringified array
     var s=JSON.parse(sessionStorage.getItem("storyModels"));
-    storage.push(c.length);
-    for(i=0;i<c.length;i++){
-        storage.push(c[i]);
-        storage.push(sessionStorage.getItem("charData"+c[i]));
+    if(c!=null) {
+
+
+        storage.push(c.length);
+        for (i = 0; i < c.length; i++) {
+            storage.push(c[i]);
+            storage.push(sessionStorage.getItem("charData" + c[i]));
+        }
+    }else{
+        storage.push(0);
     }
-    storage.push(s.length);
-    for(i=0;i<s.length;i++){
-        storage.push(s[i]);
-        storage.push(sessionStorage.getItem("storyData"+s[i]));
+    if(s!=null) {
+
+
+        storage.push(s.length);
+        for (i = 0; i < s.length; i++) {
+            storage.push(s[i]);
+            storage.push(sessionStorage.getItem("storyData" + s[i]));
+        }
+    }else{
+        storage.push(0);
+    }
+    if(sessionStorage.getItem("ProjectTitle")==null){
+        console.log("no project selected");
+        return;
     }
     storage.push(sessionStorage.getItem("ProjectTitle"));
     uriContent = encodeURIComponent(JSON.stringify(storage));
