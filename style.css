@@ -342,6 +342,17 @@ input[type=file] {
 
 #properties{
 
+    position: absolute;
+    bottom:30px;
+    right:40px;
+    border: 1px solid black;
+}
+#properties tr:nth-child(even){background-color: #f2f2f2}
+#fileClose{
+    position: absolute;
+    bottom:97px;
+    right:18px;
+    cursor: pointer;
 }
 /* END OF SIDENAV */
 

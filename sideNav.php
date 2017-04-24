@@ -12,7 +12,7 @@
         <br>
         <input type="button" value="Fork Weight" onclick="sideWeight();" id="nodeSaveButton" />
 
-        <div id="properties" style="display: none">
+        <!--div id="properties" style="display: none">
             <span>Node Properties</span>
             <br>
 
@@ -34,5 +34,5 @@
             </table>
 
 
-        </div>
+        </div-->
     </div>

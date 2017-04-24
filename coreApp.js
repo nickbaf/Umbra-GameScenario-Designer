@@ -689,7 +689,7 @@ function draw() {
 
     }
     /**
-     * Function that handles the doulbe click inside the canvas.If
+     * Function that handles the double click inside the canvas.If
      * the event returns a node display his attributes in the right side Customizer.
      */
     network.on('doubleClick',function (evnt) {
@@ -698,11 +698,12 @@ function draw() {
         var node = network.body.data.nodes.get(nodeid);
         // alert(node.id);
         document.getElementById("properties").style.display = "block";
+        document.getElementById("fileClose").style.display = "block";
         document.getElementById("propertyID").innerHTML = toLabel(node.id);
         document.getElementById("propertyType").innerHTML = node.type;
         document.getElementById("propertyInfo").innerHTML = node.info;
         //display the fork's weight in later version
-        openNav();
+       // openNav();
     }
     });
     if(forkWeights.length>0) {
@@ -1183,9 +1184,16 @@ function openNav() {
     document.getElementById("mySidenav").style.width = "450px";
 }
 
+/**
+ * Function that closes the nodes' info
+ */
+function closeInfo(){
+    document.getElementById("properties").style.display = "none";
+    document.getElementById("fileClose").style.display = "none";
+}
 function closeNav() {
     try {
-        document.getElementById("properties").style.display = "none";
+       // document.getElementById("properties").style.display = "none";
     }catch (err){
         console.log("closeNav closes properties...need to fix this sometime :P")
     }
