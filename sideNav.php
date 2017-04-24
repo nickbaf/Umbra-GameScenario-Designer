@@ -11,7 +11,7 @@
         <a href="#">Other info (TBD)</a>
         <br>
         <input type="button" value="Fork Weight" onclick="sideWeight();" id="nodeSaveButton" />
-
+        <input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" />
         <!--div id="properties" style="display: none">
             <span>Node Properties</span>
             <br>

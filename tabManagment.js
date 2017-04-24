@@ -174,3 +174,62 @@ function writeActiveTabs(type) { //na ginei gia story also
         }
     }
 }
+
+function deleteTab() {
+    /**
+     * if the user makes the request to delete a tab in character model.
+     */
+    if(jQuery.inArray( window.location.href, "charactermodel.php" )){
+        var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever...");
+
+        if (r == true) {
+            var name=sessionStorage.getItem("modelName");
+            sessionStorage.removeItem("charData"+name);
+            sessionStorage.removeItem("modelName");
+            var names=JSON.parse(sessionStorage.getItem("charModels"));
+            for(var i=0;i<names.length;i++){
+                console.log(names[i]);
+                if(names[i]==name){
+                    names.splice(i,1);
+                }
+            }
+            sessionStorage.removeItem("charModels");
+            sessionStorage.setItem("charModels",JSON.stringify(names));
+            alert("Tab "+name+" deleted...");
+            window.location="main.php"; //redirects user
+        }
+        return;
+    }
+
+    /**
+     * if the user makes the request from a flowchart tab.
+     */
+    var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever...");
+
+    if (r == true) {
+        var name=sessionStorage.getItem("storyName");
+
+        sessionStorage.removeItem("storyData"+name);
+        var names=JSON.parse(sessionStorage.getItem("storyModels"));
+        for(var i=0;i<names.length;i++){
+            console.log(names[i]);
+            if(names[i]==name){
+                names.splice(i,1);
+            }
+        }
+        sessionStorage.removeItem("storyModels");
+        sessionStorage.setItem("storyModels",JSON.stringify(names));
+
+        var names=JSON.parse(sessionStorage.getItem("metrics"));
+        for(var i=0;i<names.length;i++){
+            console.log(names[i]);
+            if(names[i]==name){
+                names.splice(i,1);
+            }
+        }
+        sessionStorage.removeItem("metrics");
+        sessionStorage.setItem("metrics",JSON.stringify(names));
+        alert("Tab "+name+" deleted...");
+        window.location="main.php"; //redirects user
+    }
+}
