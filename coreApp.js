@@ -1038,6 +1038,17 @@ function insertCharName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
         document.getElementById("newCharPane").style.display = 'block';
     } else if (type == "save") {
         var tempName = document.getElementById("cname").value;
+        var names=JSON.parse(sessionStorage.getItem("charModels"));
+        if(names!=null){
+            for(var i=0;i<names.length;i++){
+                console.log(names[i]);
+                if(names[i]==tempName){
+                    alert("Character Model with name "+tempName+" already exists..");
+                    return;
+                }
+            }}
+
+
         charModels.push(tempName);
         sessionStorage.setItem("charModels",JSON.stringify(charModels));
         var el=document.createElement("a"); //create an "a" element
@@ -1078,6 +1089,17 @@ function insertFlowName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
         document.getElementById("newStoryPane").style.display = 'block';
     } else if (type == "save") {
         var tempName = document.getElementById("sfname").value;
+        var names=JSON.parse(sessionStorage.getItem("storyModels"));
+        if(names!=null){
+        for(var i=0;i<names.length;i++){
+            console.log(names[i]);
+            if(names[i]==tempName){
+                alert("Flow Chart with name "+tempName+" already exists..");
+                return;
+            }
+        }}
+
+
         //WATCH OUT!!
         storyModels.push(tempName);
         sessionStorage.setItem("storyModels", JSON.stringify(storyModels));
