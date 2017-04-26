@@ -179,7 +179,7 @@ function deleteTab() {
     /**
      * if the user makes the request to delete a tab in character model.
      */
-    if(jQuery.inArray( window.location.href, "charactermodel.php" )){
+    if(jQuery.inArray( window.location.href, "charactermodel.php" )>0){
         var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever...");
 
         if (r == true) {
@@ -199,37 +199,37 @@ function deleteTab() {
             window.location="main.php"; //redirects user
         }
         return;
-    }
+    }else {
 
-    /**
-     * if the user makes the request from a flowchart tab.
-     */
-    var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever...");
+        /**
+         * if the user makes the request from a flowchart tab.
+         */
+        var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever.");
 
-    if (r == true) {
-        var name=sessionStorage.getItem("storyName");
-
-        sessionStorage.removeItem("storyData"+name);
-        var names=JSON.parse(sessionStorage.getItem("storyModels"));
-        for(var i=0;i<names.length;i++){
-            console.log(names[i]);
-            if(names[i]==name){
-                names.splice(i,1);
+        if (r == true) {
+            var name = sessionStorage.getItem("storyName");
+            sessionStorage.removeItem("storyData" + name);
+            var names = JSON.parse(sessionStorage.getItem("storyModels"));
+            for (var i = 0; i < names.length; i++) {
+                console.log(names[i]);
+                if (names[i] == name) {
+                    names.splice(i, 1);
+                }
             }
-        }
-        sessionStorage.removeItem("storyModels");
-        sessionStorage.setItem("storyModels",JSON.stringify(names));
+            sessionStorage.removeItem("storyModels");
+            sessionStorage.setItem("storyModels", JSON.stringify(names));
 
-        var names=JSON.parse(sessionStorage.getItem("metrics"));
-        for(var i=0;i<names.length;i++){
-            console.log(names[i]);
-            if(names[i]==name){
-                names.splice(i,1);
+            var names = JSON.parse(sessionStorage.getItem("metrics"));
+            for (var i = 0; i < names.length; i++) {
+                console.log(names[i]);
+                if (names[i] == name) {
+                    names.splice(i, 1);
+                }
             }
+            sessionStorage.removeItem("metrics");
+            sessionStorage.setItem("metrics", JSON.stringify(names));
+            alert("Tab " + name + " deleted...");
+            window.location = "main.php"; //redirects user
         }
-        sessionStorage.removeItem("metrics");
-        sessionStorage.setItem("metrics",JSON.stringify(names));
-        alert("Tab "+name+" deleted...");
-        window.location="main.php"; //redirects user
     }
 }
