@@ -28,7 +28,7 @@
 
 <div id="buttons">
     <button class="button  save" id="saveData" onclick="ultimaSave();" href="#" ><span>Save Project</span></button>
-    <button class="button  arrow" id="newData" onclick='insertName("load");'><span>New Story Project</span></button>
+    <button class="button  arrow2" id="newData" onclick='insertName("load");'><span>New Story Project</span></button>
     <button class="button  load" type="file"  class="button" id="loadData" onclick="ultimaLoad();"><span> Load Project</span></button>
     <input type="file" id="upload" />
 </div>

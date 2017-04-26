@@ -251,21 +251,21 @@ h1{
     min-height: 3.6em;
     font-size: 25px;
 }
-.arrow {
+.arrow2 {
     background: #FE5F55;
 
 }
-.arrow:hover {
+.arrow2:hover {
     background: #b9b627;
 }
-.arrow:active,
-.arrow:focus {
+.arrow2:active,
+.arrow2:focus {
     background: #706e18;
 }
-.arrow:after {
+.arrow2:after {
     content: "\F054";
 }
-.arrow:hover:after {
+.arrow2:hover:after {
     -webkit-animation: bounceright .3s alternate ease infinite;
     animation: bounceright .3s alternate ease infinite;
 }
