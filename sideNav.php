@@ -6,7 +6,7 @@
         <p class="sidenavTitle" id="sidetitle">Customize your Network prefrences</p>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="line-separator"></div>
-        <a href="#">About</a>
+        <a href="#" onclick="aboutBaf('open');" style=" cursor: help;">About</a>
         <a href="#">Network Physics</a>
         <a href="#">Other info (TBD)</a>
         <br>

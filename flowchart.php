@@ -90,7 +90,7 @@ include("menu.php") ?>
 <div id="storychart"></div>
 
 <?php include("sideNav.php") ?>
-
+<?php include("about.php") ?>
     <div class="namesPane" id="newCharPane">
         <span>New Character Model Name</span>
         <br>
