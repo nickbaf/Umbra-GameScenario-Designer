@@ -936,6 +936,53 @@ function computeMetrics() {
     }*/
 
     //CCF
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        options:{
+            maintainAspectRatio: false
+        },
+        data: {
+            labels: ["Exposition","Rising Action","Climax","Falling Action"],
+            datasets: [{
+                label: 'Endings',
+                data: [12, 19, 3, 17],
+                backgroundColor: "rgba(153,255,51,0.6)"
+            }, {
+                label: 'Choices',
+                data: [2, 29, 5, 5],
+                backgroundColor: "rgba(255,153,0,0.6)"
+            }]
+        }
+    });
+
+
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        options:{
+            maintainAspectRatio: false,
+            title: {
+                display: true,
+                text: 'Custom Chart Title'
+            }
+        },
+        data: {
+            labels: ["Exposition","Rising Action","Climax","Falling Action"],
+            datasets: [{
+                label: 'Endings',
+                data: [12, 19, 3, 17],
+                backgroundColor: "rgba(153,255,51,0.6)"
+            }, {
+                label: 'Choices',
+                data: [2, 29, 5, 5],
+                backgroundColor: "rgba(255,153,0,0.6)"
+            }]
+        }
+    });
+
+
 }
 
 function sideWeight() {

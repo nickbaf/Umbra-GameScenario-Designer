@@ -159,16 +159,7 @@ body{
     text-align: center;
 }
 
-#buttons{
-    position:fixed;
-    text-align: center;
-    left:30%;
-    top:250px;
-    font-family: 'Gloria Hallelujah', cursive;
 
-
-
-}
 
 /*HOME SCREEN ASSETS*/
 h1{
@@ -200,46 +191,176 @@ h1{
     text-align: center;
 }
 
-
-
-.button {
-    border-radius: 4px;
-    background-color: #f4511e;
-    border: none;
-    color: #FFFFFF;
+/*HOME BUTTONS */
+#buttons{
+    display: block;
+    position:fixed;
     text-align: center;
-    font-size: 28px;
-    padding: 20px;
-    width: 350px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-}
+    left:20%;
+    top:250px;
+    font-family: 'Gloria Hallelujah', cursive;
 
-.button span {
-    cursor: pointer;
+
+
+}
+.button {
     display: inline-block;
+    font-family: "Montserrat", "Trebuchet MS", Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
     position: relative;
-    transition: 0.5s;
-}
+    padding: .8em 1.4em;
+    padding-right: 4.7em;
+    background: #009ED8;
+    border: none;
+    color: white;
+    transition: .2s;
 
-.button span:after {
-    content: '\00bb';
+}
+.button:before,
+.button:after {
     position: absolute;
-    opacity: 0;
     top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-
-.button:hover span {
-    padding-right: 25px;
-}
-
-.button:hover span:after {
-    opacity: 1;
+    bottom: 0;
     right: 0;
+    padding-top: inherit;
+    padding-bottom: inherit;
+    width: 2.8em;
+    content: "\00a0";
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 2.2em;
+    text-align: center;
+    transition: .2s;
+    transform-origin: 50% 60%;
+    vertical-align: middle;
 }
+.button:before {
+    background: rgba(0, 0, 0, 0.1);
+}
+.button:hover {
+    background: #0079a5;
+}
+.button:active,
+.button:focus {
+    background: #002e3f;
+    outline: none;
+}
+
+/*Constraints*/
+.button {
+    min-width: 20em;
+    min-height: 3.6em;
+    font-size: 25px;
+}
+.arrow {
+    background: #FE5F55;
+
+}
+.arrow:hover {
+    background: #b9b627;
+}
+.arrow:active,
+.arrow:focus {
+    background: #706e18;
+}
+.arrow:after {
+    content: "\F054";
+}
+.arrow:hover:after {
+    -webkit-animation: bounceright .3s alternate ease infinite;
+    animation: bounceright .3s alternate ease infinite;
+}
+
+/*-----------------*/
+.save {
+    background: #FE5F55;
+
+}
+.save:hover {
+    background: #b9b627;
+}
+.save:active,
+.save:focus {
+    background: #706e18;
+}
+.save:after {
+    content: "\f0c7";
+}
+.save:hover:after {
+    -webkit-animation: wiggle .3s alternate ease infinite;
+    animation: wiggle .3s alternate ease infinite;
+}
+/*-----------------*/
+.load {
+    background: #FE5F55;
+
+}
+.load:hover {
+    background: #b9b627;
+}
+.load:active,
+.load:focus {
+    background: #706e18;
+}
+.load:after {
+    content: "\f15c";
+}
+.load:hover:after {
+    -webkit-animation: bounceup .3s alternate ease infinite;
+    animation: bounceup .3s alternate ease infinite;
+}
+
+
+@-webkit-keyframes bounceright {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        -webkit-transform: translateX(3px);
+    }
+}
+@-webkit-keyframes bounceup {
+    from {
+        -webkit-transform: translateY(0);
+    }
+    to {
+        -webkit-transform: translateY(-5px);
+    }
+}
+@-webkit-keyframes wiggle {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(30deg);
+    }
+}
+@keyframes bounceright {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(3px);
+    }
+}
+@keyframes bounceup {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-5px);
+    }
+}
+@keyframes wiggle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(30deg);
+    }
+}
+
+
+/*END OF HOME BUTTONS */
 
 
 #blackout {
@@ -369,4 +490,18 @@ position: fixed;
 
 #theTable tr td{
     padding: 10px;
+}
+.camvas2d{
+    display: inline-block;
+    position: absolute;
+    bottom: 3%;
+    width:30%;
+    height: 30%;
+}
+
+#chart1{
+    right:2%;
+}
+#chart2{
+    right:30%;
 }

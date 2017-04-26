@@ -10,6 +10,7 @@
     <script type="text/javascript" src="coreApp.js"></script>
     <script type="text/javascript" src="tabManagment.js"></script>
     <script type="text/javascript" src="metricsCalc.js"></script>
+    <script type="text/javascript" src="Chart.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-Side menu icons-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -137,8 +138,14 @@
 </table>
 
 <h2 id="metricsTitle" style="position: fixed; bottom: 30%; left: 50%;">Metrics about story ταδε..</h2>
+<div id="chart1" class="camvas2d">
+    <canvas id="myChart"></canvas>
 
+</div>
+    <div id="chart2" class="camvas2d">
+        <canvas id="myChart2"></canvas>
 
+    </div>
 
 <div class="namesPane" id="newCharPane">
     <span>New Character Model Name</span>
