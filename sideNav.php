@@ -12,27 +12,15 @@
         <br>
         <input type="button" value="Fork Weight" onclick="sideWeight();" id="nodeSaveButton" />
         <input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" />
-        <!--div id="properties" style="display: none">
-            <span>Node Properties</span>
-            <br>
-
-            <table style="margin:auto;">
-                <tr>
-                    <td>ID:</td>
-                    <td id="propertyID">id</td>
-                </tr>
-                <tr>
-                    <td>Node Type:</td>
-                    <td id="propertyType">type</td>
-                </tr>
-                <tr>
-                    <td>Info:</td>
-                    <td id="propertyInfo">info</td>
-                </tr>
-
-
-            </table>
-
-
-        </div-->
+        <div id="pricing-table" class="clear">
+            <div class="plan" id="most-popular">
+                <h3>Number of Choices-NoC <span id="choices">NaN</span></h3>
+            </div>
+            <div class="plan" id="most-popular">
+                <h3>Number of Actions-NoA <span id="actions">NaN</span></h3>
+            </div>
+            <div class="plan" id="most-popular">
+                <h3>Number of Ends-NoE   <br></br><span id="ends">NaN</span></h3>
+            </div>
+        </div>
     </div>

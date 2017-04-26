@@ -19,10 +19,10 @@
 
 
 </head>
-<body onload="init('metric');">
+<body onload="init('metric');" style=" background: -webkit-linear-gradient(left, #dde45c, #25b7c4);">
 <?php include("menu.php") ?>
 
-
+<h1 id="metricsTitle" style="position: fixed; bottom: 30%; left: 50%;">Metrics about story ταδε..</h1>
 <!-- HOME SCREEN ASSETS -->
 
 
@@ -137,7 +137,7 @@
     </tr>
 </table>
 
-<h2 id="metricsTitle" style="position: fixed; bottom: 30%; left: 50%;">Metrics about story ταδε..</h2>
+
 <div id="chart1" class="camvas2d">
     <canvas id="myChart"></canvas>
 

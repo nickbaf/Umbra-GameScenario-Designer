@@ -461,6 +461,7 @@ input[type=file] {
 
 }
 
+/* Properties pane */
 #properties{
 
     position: absolute;
@@ -475,10 +476,121 @@ input[type=file] {
     right:18px;
     cursor: pointer;
 }
+
+#pricing-table {
+    bottom: -10px;
+    position: fixed;
+    text-align: center;
+    display:none;
+    /* total computed width = 222 x 3 + 226 */
+}
+
+#pricing-table .plan {
+    font: 12px 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
+    text-shadow: 0 1px rgba(255, 255, 255, .8);
+    background: #edeafa; /* down color */
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 20px;
+    width: 100px;
+    /* plan width = 180 + 20 + 20 + 1 + 1 = 222px */
+    float: left;
+    position: relative;
+}
+
+#pricing-table #most-popular {
+    z-index: 2;
+    top: -13px;
+    height: 150px;
+    border-width: 3px;
+    padding: 30px 20px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
+    box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
+}
+
+
+
+/* --------------- */
+
+#pricing-table h3 {
+    font-size: 20px;
+    font-weight: normal;
+    padding: 20px;
+    margin: -20px -20px 50px -20px;
+    background-color: #e9eeeb;
+    /* gradient up colors */
+    background-image: -moz-linear-gradient(#fff,#eee);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+    background-image: -webkit-linear-gradient(#fff, #eee);
+    background-image: -o-linear-gradient(#fff, #eee);
+    background-image: -ms-linear-gradient(#fff, #eee);
+    background-image: linear-gradient(#fff, #eee);
+}
+
+#pricing-table #most-popular h3 {
+    background-color: #b9bbf2;
+    background-image: -moz-linear-gradient(#cdcef6, #baeee6);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#cdcef6), to(#baeee6));
+    background-image: -webkit-linear-gradient(#cdcef6, #baeee6);
+    background-image: -o-linear-gradient(#cdcef6, #baeee6);
+    background-image: -ms-linear-gradient(#cdcef6, #baeee6);
+    background-image: linear-gradient(#cdcef6, #baeee6);
+    margin-top: -30px;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+}
+
+#pricing-table h3 span {
+    display: block;
+    font: bold 25px/70px Georgia, Serif;
+    color: #000000; /* text color */
+    background: #fff;
+    border: 5px solid #fff;
+    height: 70px;
+    width: 70px;
+    margin: 10px auto -65px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    -moz-box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #2a9599 inset;
+    -webkit-box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
+    box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #899932 inset;
+}
+
+/* --------------- */
+
+
+.clear:before, .clear:after {
+    content:"";
+    display:table
+}
+
+.clear:after {
+    clear:both
+}
+.clear {
+    zoom:1
+}
+
+
+
+
+
+
+
+
 /* END OF SIDENAV */
 
 
 /*METRICS STYLE*/
+#metricsTitle{
+    font-size: 1.4em;
+}
 
 #theTable{
 position: fixed;

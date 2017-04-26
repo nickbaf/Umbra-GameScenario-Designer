@@ -1250,7 +1250,39 @@ function ultimaLoad() {
  * Functions that hadles the right side menu.
  */
 function openNav() {
+    /* From Modernizr */
+    function whichTransitionEvent(){
+        var t;
+        var el = document.createElement('fakeelement');
+        var transitions = {
+            'transition':'transitionend',
+            'OTransition':'oTransitionEnd',
+            'MozTransition':'transitionend',
+            'WebkitTransition':'webkitTransitionEnd'
+        }
+
+        for(t in transitions){
+            if( el.style[t] !== undefined ){
+                return transitions[t];
+            }
+        }
+    }
+
+    /* Listen for a transition! */
+    var transitionEvent = whichTransitionEvent();
+    transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event);
+    function event() {
+        document.getElementById("pricing-table").style.display="block";
+        var rep=numberOfMetrics(nodes);
+        document.getElementById("ends").innerHTML = rep["noE"];
+        document.getElementById("choices").innerHTML = rep["noC"];
+        document.getElementById("actions").innerHTML = rep["noA"];
+        document.getElementById("mySidenav").removeEventListener(transitionEvent,event);
+    };
+
     document.getElementById("mySidenav").style.width = "450px";
+
+
 }
 
 /**
@@ -1261,6 +1293,7 @@ function closeInfo(){
     document.getElementById("fileClose").style.display = "none";
 }
 function closeNav() {
+    document.getElementById("pricing-table").style.display="none";
     try {
        // document.getElementById("properties").style.display = "none";
     }catch (err){
