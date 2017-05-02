@@ -179,7 +179,7 @@ function deleteTab() {
     /**
      * if the user makes the request to delete a tab in character model.
      */
-    if(jQuery.inArray( window.location.href, "charactermodel.php" )>0){
+    if(window.location.href.search("charactermodel" )>0){
         var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever...");
 
         if (r == true) {

@@ -539,7 +539,7 @@ function draw() {
     var container = document.getElementById('storychart');
     var options = {
         physics:{
-            enabled:false,
+            enabled:true,
             /*barnesHut: {
                 gravitationalConstant: -2000,
                 centralGravity: 0.3,
@@ -548,21 +548,21 @@ function draw() {
                 //damping: 0.09,
                 avoidOverlap: 1,
             }*/
-            /*forceAtlas2Based: {
+            forceAtlas2Based: {
                 gravitationalConstant: -50,
                 centralGravity: 0.01,
                 springConstant: 0.08,
                 springLength: 100,
                 damping: 0.4,
                 avoidOverlap: 1
-            },*/
+            },
 
         },
         layout: {
             randomSeed: 3,
             improvedLayout:false,
             hierarchical: {
-                enabled:true,
+                enabled:false,
                 levelSeparation: 150,
                 nodeSpacing: 100,
                 treeSpacing: 200,
@@ -613,6 +613,7 @@ function draw() {
                 document.getElementById('node-label').value = data.label;
                 document.getElementById('node-info').value = data.info;
                 document.getElementById('node-type').value = data.type;
+                document.getElementById('narrative-phase').value = data.narrative;
                 document.getElementById('nodeSaveButton').onclick = saveNodeData.bind(this, data, callback);
                 document.getElementById('nodeCancelButton').onclick = cancelEdit.bind(this, callback);
                 document.getElementById('node-popUp').style.display = 'block';
@@ -701,6 +702,7 @@ function draw() {
         document.getElementById("fileClose").style.display = "block";
         document.getElementById("propertyID").innerHTML = toLabel(node.id);
         document.getElementById("propertyType").innerHTML = node.type;
+        document.getElementById("propertyPhase").innerHTML = node.narrative;
         document.getElementById("propertyInfo").innerHTML = node.info;
         //display the fork's weight in later version
        // openNav();
@@ -845,6 +847,7 @@ function saveNodeData(data, callback) {
         };
     }
     data.info=document.getElementById("node-info").value;
+    data.narrative=document.getElementById("narrative-phase").value;
     clearPopUp();
     callback(data);
     for(i=0;i<nodes.length;i++){
@@ -1272,11 +1275,14 @@ function openNav() {
     var transitionEvent = whichTransitionEvent();
     transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event);
     function event() {
-        document.getElementById("pricing-table").style.display="block";
-        var rep=numberOfMetrics(nodes);
-        document.getElementById("ends").innerHTML = rep["noE"];
-        document.getElementById("choices").innerHTML = rep["noC"];
-        document.getElementById("actions").innerHTML = rep["noA"];
+        try {
+            var rep = numberOfMetrics(nodes);
+
+            document.getElementById("pricing-table").style.display = "block";
+            document.getElementById("ends").innerHTML = rep["noE"];
+            document.getElementById("choices").innerHTML = rep["noC"];
+            document.getElementById("actions").innerHTML = rep["noA"];
+        }catch (e){};
         document.getElementById("mySidenav").removeEventListener(transitionEvent,event);
     };
 

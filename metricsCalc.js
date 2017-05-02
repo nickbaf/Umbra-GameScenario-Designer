@@ -201,7 +201,7 @@ function compute(fork,previousNode){
                     var temp=[];
                     temp.push(fork);
                     //console.log("Found loop at "+toLabel(fork));
-                    debug("Found loop while acessing node="+toLabel(fork));
+                    debug("Found loop while acessing the node="+toLabel(fork));
                     debug("#######\n\n");
                     return {w:-1,type:"Choice",path:temp};
                 }
@@ -239,7 +239,7 @@ function compute(fork,previousNode){
                     flag=true;
                     for(var e=0;e<topResult[i]["returned"].length;e++){
                         returned.push(topResult[i]["returned"][e]);
-                        debug("found a return node,  length=="+returned.length);
+                        debug("found a return node no."+toLabel(topResult[i]["returned"][e])+" ,length=="+returned.length);
                     }
 
 
@@ -269,7 +269,7 @@ function compute(fork,previousNode){
                             console.log("count");
                         }
                     }
-                    console.log("have="+topResult.length+"need="+count);
+                    console.log("have="+count+"need="+topResult.length);
                     if(count>=topResult.length){ //count>1 //==
                         flag=false;
                         console.log("FOUND"+toLabel(returned[g]));
@@ -364,7 +364,7 @@ function compute(fork,previousNode){
             }
             console.log(toLabel(fork)+" is visited with path length "+visit.length);
             if(returned.length>0){
-                console.log("Didn't found two paths to-"+returned+" sending onwards...")
+                console.log("Didn't found two paths to-"+toLabel(returned)+" sending onwards...")
                 return {w: netWeight, type: "Choice",path:visit,returned:returned};
             }
             return {w: netWeight, type:"Choice",path:visit};

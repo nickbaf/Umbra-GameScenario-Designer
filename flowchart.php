@@ -45,15 +45,25 @@ include("menu.php") ?>
                 </tr>
                 <tr>
                     <td>Node type</td><td>
-                    <select id="node-type">
-                        <option value="Start">Start</option>
-                        <option value="Narrative">Narrative</option>
-                        <option value="Goal">Goal</option>
-                        <option value="Choice">Choice</option>
-                        <option value="Good Ending">Good Ending</option>
-                        <option value="Bad Ending">Bad Ending</option>
-                    </select>
-                </td>
+                        <select id="node-type">
+                            <option value="Start">Start</option>
+                            <option value="Narrative">Narrative</option>
+                            <option value="Goal">Goal</option>
+                            <option value="Choice">Choice</option>
+                            <option value="Good Ending">Good Ending</option>
+                            <option value="Bad Ending">Bad Ending</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Narrative Phase</td><td>
+                        <select id="narrative-phase">
+                            <option value="Exposition">Exposition</option>
+                            <option value="Rising Action">Rising Action</option>
+                            <option value="Climax">Climax</option>
+                            <option value="Falling Action">Falling Action</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>Other Info:</td>
@@ -125,6 +135,10 @@ include("menu.php") ?>
         <tr>
             <td>Node Type:</td>
             <td id="propertyType">type</td>
+        </tr>
+        <tr>
+            <td>Narrative Phase:</td>
+            <td id="propertyPhase">type</td>
         </tr>
         <tr>
             <td>Info:</td>
