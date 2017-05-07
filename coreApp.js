@@ -1254,6 +1254,53 @@ function ultimaLoad() {
  */
 function openNav() {
     /* From Modernizr */
+    if(window.location.href.search("charactermodel")>0){ //CharacterModel
+
+        function whichTransitionEvent(){
+            var t;
+            var el = document.createElement('fakeelement');
+            var transitions = {
+                'transition':'transitionend',
+                'OTransition':'oTransitionEnd',
+                'MozTransition':'transitionend',
+                'WebkitTransition':'webkitTransitionEnd'
+            }
+
+            for(t in transitions){
+                if( el.style[t] !== undefined ){
+                    return transitions[t];
+                }
+            }
+        }
+
+        /* Listen for a transition! */
+
+        var transitionEvent = whichTransitionEvent();
+        transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event);
+        function event() {
+            try {
+                var rep = ccf(cNodes,cEdges);
+                document.getElementById("pricing-table").style.display = "block";
+                var temp=document.getElementById("h3actions");
+                document.getElementById("h3actions").innerText="Characters Coupling Factor-CCF";
+                var el = document.createElement("span");
+                el.setAttribute("id","actions");
+                temp.appendChild(el);
+                document.getElementById("actions").innerHTML=rep;
+                var temp=document.getElementById("h3choices");
+                document.getElementById("h3choices").innerHTML = "Number of Characters <br></br>";
+                var el = document.createElement("span");
+                el.setAttribute("id","choices");
+                temp.appendChild(el);
+                document.getElementById("choices").innerHTML=cNodes.length;
+            }catch (e){alert(e)};
+            document.getElementById("mySidenav").removeEventListener(transitionEvent,event);
+        };
+    }
+
+
+
+
     function whichTransitionEvent(){
         var t;
         var el = document.createElement('fakeelement');

@@ -422,3 +422,19 @@ function toLabel(fork) {
         }
     }
 }
+
+
+
+function ccf(nodes,edges) {
+    return Math.round(edges.length/(factorial(nodes.length)/(2*factorial(nodes.length-2)))*100)/100;
+
+}
+
+function factorial(n) {
+    if(n==1 || n==0){
+        return 1;
+    }else{
+        return n*(factorial(n-1));
+    }
+
+}

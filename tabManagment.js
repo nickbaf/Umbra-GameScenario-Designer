@@ -180,10 +180,11 @@ function deleteTab() {
      * if the user makes the request to delete a tab in character model.
      */
     if(window.location.href.search("charactermodel" )>0){
-        var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever...");
+        var name=sessionStorage.getItem("modelName");
+        var r = confirm("Are you sure you want to Delete Tab "+name+" ?\nAll unsaved changes will be lost forever...");
 
         if (r == true) {
-            var name=sessionStorage.getItem("modelName");
+
             sessionStorage.removeItem("charData"+name);
             sessionStorage.removeItem("modelName");
             var names=JSON.parse(sessionStorage.getItem("charModels"));
@@ -204,10 +205,11 @@ function deleteTab() {
         /**
          * if the user makes the request from a flowchart tab.
          */
-        var r = confirm("Are you sure you want to Delete the Tab?\nAll unsaved changes will be lost forever.");
+        var name = sessionStorage.getItem("storyName");
+        var r = confirm("Are you sure you want to Delete the Tab "+name+" ?\nAll unsaved changes will be lost forever.");
 
         if (r == true) {
-            var name = sessionStorage.getItem("storyName");
+
             sessionStorage.removeItem("storyData" + name);
             var names = JSON.parse(sessionStorage.getItem("storyModels"));
             for (var i = 0; i < names.length; i++) {

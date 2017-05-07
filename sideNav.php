@@ -14,13 +14,13 @@
         <input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" />
         <div id="pricing-table" class="clear">
             <div class="plan" id="most-popular">
-                <h3>Number of Choices-NoC <span id="choices">NaN</span></h3>
+                <h3 id="h3choices">Number of Choices-NoC <span id="choices">NaN</span></h3>
             </div>
             <div class="plan" id="most-popular">
-                <h3>Number of Actions-NoA <span id="actions">NaN</span></h3>
+                <h3 id="h3actions">Number of Actions-NoA <span id="actions">NaN</span></h3>
             </div>
             <div class="plan" id="most-popular">
-                <h3>Number of Ends-NoE   <br></br><span id="ends">NaN</span></h3>
+                <h3 id="h3ends">Number of Ends-NoE   <br></br><span id="ends">NaN</span></h3>
             </div>
         </div>
     </div>
