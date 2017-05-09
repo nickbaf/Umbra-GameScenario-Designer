@@ -933,12 +933,15 @@ function computeMetrics() {
         document.getElementById("apic").innerHTML = rep["apIC"];
         document.getElementById("projectName").innerHTML+="  ---   Metrics for "+sessionStorage.getItem("metricName");
         document.getElementById("metricsTitle").innerHTML="Metrics for "+sessionStorage.getItem("metricName");
+
+
+        rep=ADbC(nodes,edges);
+        document.getElementById("adbc").innerHTML = rep;
    /* }catch (err){
         console.log("Invalid graph");
         alert(err);
     }*/
 
-    //CCF
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {

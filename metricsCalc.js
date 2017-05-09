@@ -6,11 +6,11 @@ var edges=[];
 var nodes=[];
 var wForks=[];
 var visited=[];
+var noC=0; //Global varialbe to be used in later metrics
+var noE=0;
+var noA=0;
+var noG=0;
 function numberOfMetrics(nodes) {
-    var noC=0;
-    var noE=0;
-    var noA=0;
-    var noG=0;
     var i;
     var temp;
     for(i=0;i<nodes.length;i++){
@@ -437,4 +437,254 @@ function factorial(n) {
         return n*(factorial(n-1));
     }
 
+}
+
+var costs=[]; //from,to,cost
+var original=[]; //fork,cCost
+var choices=[]; //for order issues
+var path=[]; //from,to
+var tempCosts=[];
+function findCost(nodes,edges) {
+    var i;
+    var start;
+    for(i=0;i<nodes.length;i++){
+        if(nodes[i].type=="Start"){
+            start=nodes[i].id;
+            break;
+        }
+    }
+    for(i=0;i<nodes.length;i++){
+        if(getNodeType(getDestinations(start))!="Choice"){
+            start=getDestinations(start);
+            continue;
+        }else{
+            start=getDestinations(start);
+            break;
+        }
+    }
+   // alert(toLabel(start));
+    console.log("start");
+    travel(start);
+    costs=temporaryClearDuplicates();
+    for(var n=0;n<costs.length;n++){
+        console.log("from"+toLabel(costs[n]["from"])+" to "+toLabel(costs[n]["to"])+"//cost "+costs[n]["cost"]);
+    }
+    console.log("finish");
+    return costs;
+}
+
+
+
+function travel(fork) {
+  //  console.log("@"+toLabel(fork));
+    var t=getNodeType(fork);
+    if(t == "Good Ending" || t == "Bad Ending"){
+        return 0;
+    }else if(t == "Narrative" || t == "Goal"){
+        var r=getDestinations(fork);
+        return travel(r[0]);
+    } else if (t == "Choice") {
+        var flag=false;
+        for(var i=0;i<choices.length;i++){
+            if(choices[i]==fork){
+                flag=true;
+            }
+        }
+        if(!flag){ //if the  choice is unchecked
+            choices.push(fork);
+            original[original.length]={fork:fork,cCost:1};
+        }else{ //if the choice has been checked
+            //TODO; des edw ti paizei
+            for(var m=0;m<original.length;m++){
+                if(original[m]["fork"]==fork){ //if we reached the choice again while following his own path.(made a loop)
+                   // console.log("return from"+toLabel(fork));
+                    return 0;
+                }
+            }
+            return fork; //fork has been checked but with no loop see ret below.**
+
+        }
+        for(var j=0;j<original.length;j++){
+            //try {
+                if (original[j]["fork"] != fork) {
+                    var minCostAlreadyInside = minCostAlreadyInsideArray(original[j]["fork"], fork);
+                    if (minCostAlreadyInside["m"] == Number.MAX_SAFE_INTEGER) {
+                        costs.push({from: original[j]["fork"], to: fork, cost: original[j]["cCost"]});
+                        original[j]["cCost"]++;
+                        temporaryPath(original[j]["fork"],fork);
+                    } else if (original[j]["cCost"] < minCostAlreadyInside["m"]) {
+                        costs.splice(minCostAlreadyInside["p"], 1);
+                        //console.log("spliced afrodite");
+                        costs.push({from: original[j]["fork"], to: fork, cost: original[j]["cCost"]});
+                        original[j]["cCost"]++;
+                        temporaryPath(original[j]["fork"],fork);
+                    }
+
+
+                }
+           /* }catch(e){
+                console.log(e);
+               // console.log(original);
+                throw "exit...";
+            }*/
+        }
+
+        var r = getDestinations(fork);
+        var ret;
+        for (var i = 0; i < r.length; i++) {
+            //console.log(i);
+            ret = travel(r[i]);
+
+            if (ret != 0) { // **   from =original, to=cost[n][ret]["to"]
+              //  console.log("!!!!!!!"+toLabel(fork)+" ret"+toLabel(ret));
+                /*for (var n = 0; n < costs.length; n++) {
+                    if (costs[n]["from"] == ret) {
+                        alert("befpre=="+toLabel(costs[n]["from"]));
+                        for (var m = 0; m < original.length; m++) {
+
+                            var minCostAlreadyInside = minCostAlreadyInsideArray(original[m]["fork"], costs[n]["to"]);
+
+                           if (minCostAlreadyInside["m"] == Number.MAX_SAFE_INTEGER) {
+                              // alert("after=="+toLabel(costs[n]["from"]));
+                                console.log("from"+toLabel(costs[n]["from"])+"to"+toLabel(costs[n]["to"])+" currentCost:"+costs[n]["cost"]);
+                                costs.push({
+                                    from: original[m]["fork"],
+                                    to: costs[n]["to"],
+                                    cost: costs[n]["cost"] + original[m]["cCost"]
+                                });
+                            } else if (original[m]["cCost"] < minCostAlreadyInside["m"]) {
+                               alert("after=="+toLabel(costs[n]["from"]));
+                               console.log("from"+toLabel(costs[n]["from"])+"to"+toLabel(costs[n]["to"])+" currentCost:"+costs[n]["cost"]);
+                                costs.splice(minCostAlreadyInside["p"], 1);
+                                //console.log("spliced afrodite");
+
+                                costs.push({
+                                    from: original[m]["fork"],
+                                    to: costs[n]["to"],
+                                    cost: costs[n]["cost"] + original[m]["cCost"] //no need for +1 because original[m][ccost] has been increased
+                                });
+                            }
+
+                        }
+
+                        //  costs.push({from: original[j]["fork"], to: fork, cost: original[j]["cCost"]});
+                    }
+                }*/
+                costs.push({
+                    from: fork,
+                    to: ret,
+                    cost: 1
+                });
+                for (var m = 0; m < original.length; m++) {
+                    for (var n = 0; n < costs.length; n++) {
+                        if (costs[n]["from"] == ret) {
+                            var minCostAlreadyInside = minCostAlreadyInsideArray(original[m]["fork"], costs[n]["to"]);
+
+                            if (minCostAlreadyInside["m"] == Number.MAX_SAFE_INTEGER) {
+                                // alert("after=="+toLabel(costs[n]["from"]));
+                               // console.log("from"+toLabel(original[m]["fork"])+"to"+toLabel(costs[n]["to"])+"through"+toLabel(ret)+" currentCost:"+costs[n]["cost"]+"+"+original[m]["cCost"]);
+                                costs.push({
+                                    from: original[m]["fork"],
+                                    to: costs[n]["to"],
+                                    cost: costs[n]["cost"] + original[m]["cCost"]
+                                });
+                                temporaryPath(original[m]["fork"],costs[n]["to"]);
+                            } else if ((original[m]["cCost"]+costs[n]["cost"]) < minCostAlreadyInside["m"]) {
+                               // alert("after=="+toLabel(costs[n]["from"]));
+                               // console.log("from"+toLabel(original[m]["fork"])+"to"+toLabel(costs[n]["to"])+"through"+toLabel(ret)+" currentCost:"+costs[n]["cost"]+"+"+original[m]["cCost"]);
+                                costs.splice(minCostAlreadyInside["p"], 1);
+                                //console.log("spliced afrodite");
+
+                                costs.push({
+                                    from: original[m]["fork"],
+                                    to: costs[n]["to"],
+                                    cost: costs[n]["cost"] + original[m]["cCost"] //no need for +1 because original[m][ccost] has been increased
+                                });
+                                temporaryPath(original[m]["fork"],costs[n]["to"]);
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+        for(var k=0;k<original.length;k++){
+            if(original[k]["fork"]==fork){
+                original.splice(k,1);
+                //costs.push({from: fork, to: "finished", cost: 0});
+                break;
+            }else{ //!!!!!!!
+                original[k]["cCost"]--;
+            }
+        }
+        return 0;
+    }
+   // console.log("=====");
+}
+
+
+function minCostAlreadyInsideArray(from,to) {
+    var min=Number.MAX_SAFE_INTEGER;
+    var pos=0;
+    for(var i=0;i<costs.length;i++){
+        if(costs[i]["from"]==from && costs[i]["to"]==to){
+            if(costs[i]["cost"]<min){
+                min=costs[i]["cost"];
+                pos=i;
+            }
+        }
+    }
+    //console.log(min+"///"+pos)
+    //return {m:min,p:pos};
+    return {m:Number.MAX_SAFE_INTEGER,p:0};
+}
+
+
+/**
+ * TODO! In later version implement minCostAlreadyInsideArray to delete duplicates as the function runs.
+ */
+function temporaryPath(from,to) {
+    for(var i=0;i<path.length;i++){
+        if(path[i]["from"]==from && path[i]["to"]==to){
+            return;
+        }
+    }
+    path.push({from:from,to:to});
+    return;
+
+}
+
+
+function temporaryClearDuplicates() {
+    var finalCost=[];
+    for(var i=0;i<path.length;i++){
+        var min=Number.MAX_SAFE_INTEGER;
+        for(var n=0;n<costs.length;n++){
+            if(costs[n]["from"]==path[i]["from"] && costs[n]["to"]==path[i]["to"]){
+                if(costs[n]["cost"]<min){
+                    min=costs[n]["cost"];
+                }
+            }
+        }
+        if(min!=Number.MAX_SAFE_INTEGER){
+            finalCost.push({from:path[i]["from"],to:path[i]["to"],cost:min});
+        }else{
+            alert("ERROR");
+            //TODO
+        }
+    }
+    return finalCost;
+}
+
+
+
+function ADbC(nodes,edges) {
+    var costs=findCost(nodes,edges);
+    var sum=0;
+    for(var k=0;k<costs.length;k++){
+        sum+=costs[k]["cost"];
+    }
+    //alert(Math.round((sum/noC)*100)/100);
+    return Math.round((sum/noC)*100)/100;
 }

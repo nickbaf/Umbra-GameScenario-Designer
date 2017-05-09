@@ -190,7 +190,7 @@
                 </tr>
                 <tr>
                     <td >Average Distance Between Choices- ADbC</td>
-                    <td>NaN</td>
+                    <td id="adbc">NaN</td>
                 </tr>
             </table>
         </td>
