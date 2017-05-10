@@ -100,10 +100,11 @@ function writeTabs(type) {
             console.log(oncl);
             el.setAttribute("onclick", oncl);
             var temp = document.getElementById("metrics");
+            var par = document.getElementById("compare");
             var child = document.createElement("li");
             child.appendChild(el);
             child.setAttribute("id", "metric" + tempName);
-            temp.appendChild(child);
+            temp.insertBefore(child, par);
         }
     }
 }
@@ -167,10 +168,11 @@ function writeActiveTabs(type) { //na ginei gia story also
             console.log(oncl);
             el.setAttribute("onclick", oncl);
             var temp = document.getElementById("metrics");
+            var par = document.getElementById("compare");
             var child = document.createElement("li");
             child.appendChild(el);
             child.setAttribute("id", "metric" + tempName);
-            temp.appendChild(child);
+            temp.insertBefore(child, par);
         }
     }
 }

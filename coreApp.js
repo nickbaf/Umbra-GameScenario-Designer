@@ -167,6 +167,7 @@ function charDraw() {
         manipulation : {
             addNode : function(data, callback) {
                 // filling in the popup DOM elements
+                openNav();
                 document.getElementById('nodeOperation').innerHTML = "Add Node";
                 document.getElementById('node-id').value = data.id;
                 document.getElementById('node-id').disabled=true;
@@ -178,6 +179,7 @@ function charDraw() {
             },
             editNode : function(data, callback) {
                 // filling in the popup DOM elements
+                openNav();
                 document.getElementById('nodeOperation').innerHTML = "Edit Node";
                 document.getElementById('node-id').value = data.id;
                 document.getElementById('node-name').value = data.charName;
@@ -197,6 +199,7 @@ function charDraw() {
             },
             editEdge : function (data,callback) {
                 // filling in the popup DOM elements
+                openNav();
                 document.getElementById('edgeOperation').innerHTML = "Edit Edge";
                 document.getElementById('edge-id').value = data.id;
                 document.getElementById('edge-label').value = data.label;
@@ -440,7 +443,7 @@ function init(type) {
             nodes = temp.nodes;
             edges = temp.edges;
             count = nodes.length;
-            computeMetrics(); //TODO
+            computeMetrics();
         }
     }
 }
@@ -595,19 +598,22 @@ function draw() {
         locale : 'en',//,
         manipulation : {
             addNode : function(data, callback) {
+                openNav();
                 // filling in the popup DOM elements
                 document.getElementById('nodeOperation').innerHTML = "Add Node";
                 document.getElementById('node-id').value = data.id ;//++count;
                 document.getElementById('node-id').disabled=true;
                 document.getElementById('node-label').value = ++count;
                 //document.getElementById('node-type').value ="Start";
-                document.getElementById('nodeSaveButton').onclick = saveNodeData.bind(this, data, callback);
-                document.getElementById('nodeCancelButton').onclick = clearPopUp.bind();
+                document.getElementById('nodeSaveButton').onclick =saveNodeData.bind(this, data, callback);
+                document.getElementById('nodeCancelButton').onclick = clearPopUp.bind(this, callback);
                 document.getElementById('node-popUp').style.display = 'block';
 
+               // alert(document.getElementById('nodeSaveButton').onclick);
             },
             editNode : function(data, callback) {
                 // filling in the popup DOM elements
+                openNav();
                 document.getElementById('nodeOperation').innerHTML = "Edit Node";
                 document.getElementById('node-id').value = data.id;
                 document.getElementById('node-label').value = data.label;
@@ -631,6 +637,7 @@ function draw() {
             },
             editEdge : function (data,callback) {
                 // filling in the popup DOM elements
+                openNav();
                 document.getElementById('edgeOperation').innerHTML = "Edit Edge";
                 document.getElementById('edge-id').value = data.id;
                 document.getElementById('edge-label').value = data.label;
@@ -1257,8 +1264,9 @@ function ultimaLoad() {
  */
 function openNav() {
     /* From Modernizr */
+    document.getElementById("spanNav").style.display="none";
     if(window.location.href.search("charactermodel")>0){ //CharacterModel
-
+        document.getElementById("tabDel").value="Delete "+sessionStorage.getItem("modelName");
         function whichTransitionEvent(){
             var t;
             var el = document.createElement('fakeelement');
@@ -1276,7 +1284,7 @@ function openNav() {
             }
         }
 
-        /* Listen for a transition! */
+
 
         var transitionEvent = whichTransitionEvent();
         transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event);
@@ -1296,45 +1304,48 @@ function openNav() {
                 el.setAttribute("id","choices");
                 temp.appendChild(el);
                 document.getElementById("choices").innerHTML=cNodes.length;
-            }catch (e){alert(e)};
+            }catch (e){alert(e)
+                 };
             document.getElementById("mySidenav").removeEventListener(transitionEvent,event);
         };
-    }
+
+    }else {
 
 
+        document.getElementById("tabDel").value = "Delete " + sessionStorage.getItem("storyName");
+        function whichTransitionEvent() {
+            var t;
+            var el = document.createElement('fakeelement');
+            var transitions = {
+                'transition': 'transitionend',
+                'OTransition': 'oTransitionEnd',
+                'MozTransition': 'transitionend',
+                'WebkitTransition': 'webkitTransitionEnd'
+            }
 
-
-    function whichTransitionEvent(){
-        var t;
-        var el = document.createElement('fakeelement');
-        var transitions = {
-            'transition':'transitionend',
-            'OTransition':'oTransitionEnd',
-            'MozTransition':'transitionend',
-            'WebkitTransition':'webkitTransitionEnd'
-        }
-
-        for(t in transitions){
-            if( el.style[t] !== undefined ){
-                return transitions[t];
+            for (t in transitions) {
+                if (el.style[t] !== undefined) {
+                    return transitions[t];
+                }
             }
         }
+
+        var transitionEvent = whichTransitionEvent();
+        transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent, event);
+        function event() {
+            try {
+                var rep = numberOfMetrics(nodes);
+
+                document.getElementById("pricing-table").style.display = "block";
+                document.getElementById("ends").innerHTML = rep["noE"];
+                document.getElementById("choices").innerHTML = rep["noC"];
+                document.getElementById("actions").innerHTML = rep["noA"];
+            } catch (e) {
+            }
+            ;
+            document.getElementById("mySidenav").removeEventListener(transitionEvent, event);
+        };
     }
-
-    /* Listen for a transition! */
-    var transitionEvent = whichTransitionEvent();
-    transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event);
-    function event() {
-        try {
-            var rep = numberOfMetrics(nodes);
-
-            document.getElementById("pricing-table").style.display = "block";
-            document.getElementById("ends").innerHTML = rep["noE"];
-            document.getElementById("choices").innerHTML = rep["noC"];
-            document.getElementById("actions").innerHTML = rep["noA"];
-        }catch (e){};
-        document.getElementById("mySidenav").removeEventListener(transitionEvent,event);
-    };
 
     document.getElementById("mySidenav").style.width = "450px";
 
@@ -1348,6 +1359,7 @@ function closeInfo(){
     document.getElementById("fileClose").style.display = "none";
 }
 function closeNav() {
+    document.getElementById("spanNav").style.display="block";
     document.getElementById("pricing-table").style.display="none";
     try {
        // document.getElementById("properties").style.display = "none";
@@ -1393,7 +1405,13 @@ function openActiveTab(type,name) {
         document.getElementById("metric"+modelName).className="active";
         document.getElementById("metrics").className="sub-menu collapse in";
         document.getElementById("metrics").setAttribute("aria-expanded",true);
-
+        if(sessionStorage.getItem("storyData"+modelName)!=null) {
+            var temp = JSON.parse(sessionStorage.getItem("storyData" + modelName));
+            nodes = temp.nodes;
+            edges = temp.edges;
+            count = nodes.length;
+            computeMetrics();
+        }
     }
 
 

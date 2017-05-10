@@ -426,6 +426,9 @@ function toLabel(fork) {
 
 
 function ccf(nodes,edges) {
+    if(nodes.length<2){
+        return 0;
+    }
     return Math.round(edges.length/(factorial(nodes.length)/(2*factorial(nodes.length-2)))*100)/100;
 
 }
