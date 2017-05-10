@@ -87,8 +87,8 @@
     setInterval(updateGradient,100);
 </script-->
 <div id="gradient" />
-
-<table id="theTable">
+<?php include("theMetrics.php") ?>
+<!--table id="theTable">
     <tr>
         <td>
 <table class="metricTable" style="margin:auto;">
@@ -197,7 +197,7 @@
 
 
     </tr>
-</table>
+</table-->
 
 
 <div id="chart1" class="camvas2d">

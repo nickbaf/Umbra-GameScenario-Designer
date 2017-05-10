@@ -681,13 +681,29 @@ function temporaryClearDuplicates() {
 }
 
 
-
+var sum=[];
+var num=[];
 function ADbC(nodes,edges) {
     var costs=findCost(nodes,edges);
-    var sum=0;
+
+    for(var i=0;i<choices.length;i++){
+        sum[i]=0;
+        num[i]=0;
+    }
     for(var k=0;k<costs.length;k++){
-        sum+=costs[k]["cost"];
+        sum[choices.indexOf(costs[k]["from"])]+=costs[i]["cost"];
+        num[choices.indexOf(costs[k]["from"])]+=1;
+        //sum+=costs[k]["cost"];
+      //  sum[costs[i].from]
+
+    }
+    var finalSum=0;
+    for(k=0;k<sum.length;k++){
+        if(sum[k]==0 || num[k]==0){
+            continue;
+        }
+        finalSum+=sum[k]/num[k];
     }
     //alert(Math.round((sum/noC)*100)/100);
-    return Math.round((sum/noC)*100)/100;
+    return Math.round((finalSum/choices.length)*100)/100;
 }

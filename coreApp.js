@@ -1004,7 +1004,15 @@ function sideWeight() {
     draw();
 }
 
-
+function compareMetrics() {
+    var doc=document.getElementsByClassName("header");
+    for(var l=0;l<doc.length;l++){
+        var one=document.createElement("div");
+        one.setAttribute("class","cell");
+        one.innerHTML="Temp";
+         doc[l].appendChild(one.firstChild);
+    }
+}
 
 
 
