@@ -58,34 +58,7 @@ include("menu.php") ?>
         <input type="button" value="cancel" onclick="insertFlowName('cancel');" id="sFnodeCancelButton" />
     </div>
 <div id="fileClose"  style="display:none" onclick="closeInfo()"><img  src="img/network/fileclose.png" alt="" align="bottom" style="width:38px;height:39px;"></div>
-<div id="properties" style="display: none">
 
-    <span>Node Properties</span>
-    <br>
-
-    <table style="margin:auto;">
-        <tr>
-            <td>ID:</td>
-            <td id="propertyID">id</td>
-        </tr>
-        <tr>
-            <td>Node Type:</td>
-            <td id="propertyType">type</td>
-        </tr>
-        <tr>
-            <td>Narrative Phase:</td>
-            <td id="propertyPhase">type</td>
-        </tr>
-        <tr>
-            <td>Info:</td>
-            <td id="propertyInfo">info</td>
-        </tr>
-
-
-    </table>
-
-
-</div>
     </body>
 
 </html>

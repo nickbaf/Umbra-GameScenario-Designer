@@ -11,6 +11,10 @@ var noE=0;
 var noA=0;
 var noG=0;
 function numberOfMetrics(nodes) {
+    noC=0; //Global varialbe to be used in later metrics
+    noE=0;
+    noA=0;
+    noG=0;
     var i;
     var temp;
     for(i=0;i<nodes.length;i++){
@@ -691,7 +695,7 @@ function ADbC(nodes,edges) {
         num[i]=0;
     }
     for(var k=0;k<costs.length;k++){
-        sum[choices.indexOf(costs[k]["from"])]+=costs[i]["cost"];
+        sum[choices.indexOf(costs[k]["from"])]+=costs[k]["cost"];
         num[choices.indexOf(costs[k]["from"])]+=1;
         //sum+=costs[k]["cost"];
       //  sum[costs[i].from]

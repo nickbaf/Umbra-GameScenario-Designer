@@ -138,7 +138,7 @@ body{
     /*width: 300px;
     height: 220px;*/
     width: 93%;
-    height: 42%;
+    height: 35%;
     background-color: rgba(250,250,250,0.2);
     border-style: groove;
     border-width: 5px;
@@ -157,7 +157,7 @@ body{
    /*width: 250px;
     height: 120px;*/
     width: 93%;
-    height: 42%;
+    height: 35%;
     background-color: rgba(250,250,250,0.2);
     border-style: groove;
     border-width: 3px;
@@ -495,8 +495,10 @@ input[type=file] {
 #properties{
 
     position: absolute;
-    bottom:30px;
-    right:40px;
+    /*bottom:30px;
+    right:40px;*/
+    width: inherit;
+    top:34%;
     border: 1px solid black;
 }
 #properties tr:nth-child(even){background-color: #f2f2f2}
@@ -638,10 +640,11 @@ position: fixed;
 .wrapper {
     margin: 0 auto;
     padding: 40px;
-    max-width: 400px;
-    position: fixed;
+     /*max-width: 400px;   The style is configured from coreApp.js*/
+    position: absolute;
     left: 15%;
-    top: 10%;
+    z-index: -1;
+    top: 8%;
     transition-duration: 2s;
 }
 
@@ -685,6 +688,8 @@ position: fixed;
 .cell {
     padding: 6px 12px;
     display: table-cell;
+    width: 300px;
+
 }
 @media screen and (max-width: 580px) {
     .cell {

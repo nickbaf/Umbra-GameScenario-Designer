@@ -48,7 +48,7 @@
                     <a href="#"><img src="img/network/mush.png" alt="" align="bottom" style="width:35px;height:28px; padding-left: 3px; padding-right: 3px;">  Metrics <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="metrics">
-                    <li id="compare"><a href="#"  class="fa fa-check-square-o" onclick='alert("TODO")'> Compare Projects</a></li>
+                    <li id="compare"><a href="metricsCompared.php"  class="fa fa-check-square-o"> Compare Projects</a></li>
                 </ul>
 
             </ul>

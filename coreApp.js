@@ -429,6 +429,7 @@ function init(type) {
         document.getElementById("storyflow").setAttribute("aria-expanded",true);
         draw();
     }else if(type=="metric"){
+        document.getElementsByClassName("wrapper")[0].style.maxWidth="400px";
         writeActiveTabs("metrics");
         writeTabs("story");
         writeTabs("char");
@@ -445,9 +446,27 @@ function init(type) {
             count = nodes.length;
             computeMetrics();
         }
+    }else if(type=="compare"){
+        writeTabs("story");
+        writeTabs("char");
+        writeTabs("metrics");
+        document.getElementById("compare").className="active";
+        document.getElementById("tab3").className="active";
+        document.getElementById("metrics").className="sub-menu collapse in";
+        document.getElementById("metrics").setAttribute("aria-expanded",true);
+        compareMetrics();
     }
 }
 
+function temp(){
+    var nodes=JSON.parse(sessionStorage.getItem("storyDataStory")).nodes;
+    var edg=JSON.parse(sessionStorage.getItem("storyDataStory")).edges;
+    for(var i=0;i<nodes.length;i++){
+        nodes[i].narrative="Rising Action";
+    }
+    sessionStorage.setItem("storyDataStory",JSON.stringify({nodes:nodes,edges:edg}));
+
+}
 
 /**
  * Function for saving the current story model into the sessionStorage
@@ -701,6 +720,7 @@ function draw() {
      * the event returns a node display his attributes in the right side Customizer.
      */
     network.on('doubleClick',function (evnt) {
+        openNav();
         var nodeid = evnt.nodes[0];
         if (nodeid != null) {
         var node = network.body.data.nodes.get(nodeid);
@@ -909,6 +929,7 @@ function saveEdgeData(data,callback) {
 
 //METRICS COMPUTE AND ANALYSIS
 
+var flagAgain=false;
 function computeMetrics() {
     //TODO
     /**
@@ -916,7 +937,15 @@ function computeMetrics() {
      */
     //try {
         var rep = numberOfMetrics(nodes);
-        document.getElementById("noc").innerHTML = rep["noC"];
+    setItemtoMetricsNormal("nocHead","noc",rep["noC"]);
+    setItemtoMetricsNormal("noeHead","noe",rep["noE"]);
+    setItemtoMetricsNormal("noaHead","noA",rep["noA"]);
+    setItemtoMetricsNormal("noc2Head","noc2",rep["noC"]);
+    setItemtoMetricsNormal("nogHead","nog",rep["noG"]);
+    setItemtoMetricsNormal("noe2Head","noe2",rep["noE"]);
+    setItemtoMetricsNormal("noc3Head","noc3",rep["noC"]);
+    setItemtoMetricsNormal("noa2Head","noA2",rep["noA"]);
+       /* document.getElementById("noc").innerHTML = rep["noC"];
         document.getElementById("noe").innerHTML = rep["noE"];
 
         document.getElementById("noa").innerHTML = rep["noA"];
@@ -925,25 +954,32 @@ function computeMetrics() {
 
         document.getElementById("noe2").innerHTML = rep["noE"];
         document.getElementById("noc3").innerHTML = rep["noC"];
-        document.getElementById("noa2").innerHTML = rep["noA"];
+        document.getElementById("noa2").innerHTML = rep["noA"];*/
         rep = aphe(nodes, edges);
-        document.getElementById("aphe").innerHTML = rep["apHE"];
+    setItemtoMetricsNormal("apheHead","aphe",rep["apHE"]);
+        //document.getElementById("aphe").innerHTML = rep["apHE"];
 
         rep = apc(nodes, edges);
-        document.getElementById("apc").innerHTML = rep["apC"];
+    setItemtoMetricsNormal("apcHead","apc",rep["apC"]);
+      //  document.getElementById("apc").innerHTML = rep["apC"];
 
         findWeights(nodes, edges);
 
         rep=choiceMetrics(edges);
-        document.getElementById("nic").innerHTML = rep["niC"];
+       /* document.getElementById("nic").innerHTML = rep["niC"];
         document.getElementById("aci").innerHTML = rep["acI"];
-        document.getElementById("apic").innerHTML = rep["apIC"];
+        document.getElementById("apic").innerHTML = rep["apIC"];*/
+    setItemtoMetricsNormal("nicHead","nic",rep["niC"]);
+    setItemtoMetricsNormal("aciHead","aci",rep["acI"]);
+    setItemtoMetricsNormal("apicHead","apic",rep["apIC"]);
         document.getElementById("projectName").innerHTML+="  ---   Metrics for "+sessionStorage.getItem("metricName");
         document.getElementById("metricsTitle").innerHTML="Metrics for "+sessionStorage.getItem("metricName");
 
 
         rep=ADbC(nodes,edges);
-        document.getElementById("adbc").innerHTML = rep;
+    setItemtoMetricsNormal("adbcHead","adbc",rep);
+    flagAgain=true;
+      //  document.getElementById("adbc").innerHTML = rep;
    /* }catch (err){
         console.log("Invalid graph");
         alert(err);
@@ -1003,17 +1039,101 @@ function sideWeight() {
     destroy();
     draw();
 }
-
+var counter=0;
 function compareMetrics() {
+    document.getElementsByClassName("wrapper")[0].style.position="absolute";
+    document.getElementsByClassName("wrapper")[0].style.zIndex="-1";
+    document.getElementsByClassName("wrapper")[0].style.width="100%";
     var doc=document.getElementsByClassName("header");
+    var models=JSON.parse(sessionStorage.getItem("storyModels"));
     for(var l=0;l<doc.length;l++){
-        var one=document.createElement("div");
-        one.setAttribute("class","cell");
-        one.innerHTML="Temp";
-         doc[l].appendChild(one.firstChild);
+        for(var k=0;k<models.length;k++){
+            var one=document.createElement("div");
+            one.setAttribute("class","cell");
+            one.innerHTML=models[k];
+             doc[l].appendChild(one);
+        }
     }
+
+    counter=0;
+
+    for(var m=0;m<models.length;m++){
+        console.log("Reading metrics for "+models[m]);
+        var temp = JSON.parse(sessionStorage.getItem("storyData" + models[m]));
+        var tNodes = temp.nodes; //Scope within loop
+        var tEdges = temp.edges; //Scope within loop
+        var rep = numberOfMetrics(tNodes); //nodes=local variable
+        /**
+         * Cardinality Metrics
+         */
+        console.log("cardinality metrics");
+        setItemtoMetricsCompare("nocHead","noc",rep["noC"]);
+        setItemtoMetricsCompare("noeHead","noe",rep["noE"]);
+        setItemtoMetricsCompare("noaHead","noA",rep["noA"]);
+        setItemtoMetricsCompare("noc2Head","noc2",rep["noC"]);
+        setItemtoMetricsCompare("nogHead","nog",rep["noG"]);
+        setItemtoMetricsCompare("noe2Head","noe2",rep["noE"]);
+        setItemtoMetricsCompare("noc3Head","noc3",rep["noC"]);
+        setItemtoMetricsCompare("noa2Head","noA2",rep["noA"]);
+
+        //aphe
+        console.log("aphe metrics");
+        rep = aphe(tNodes, tEdges);
+        setItemtoMetricsCompare("apheHead","aphe",rep["apHE"]);
+
+        //apc
+        console.log("apc metrics");
+        rep = apc(tNodes, tEdges);
+        setItemtoMetricsCompare("apcHead","apc",rep["apC"]);
+
+        /**
+         * Choice Metrics
+         */
+        console.log("choice metrics");
+        findWeights(tNodes, tEdges);
+
+        rep=choiceMetrics(tEdges);
+        setItemtoMetricsCompare("nicHead","nic",rep["niC"]);
+        setItemtoMetricsCompare("aciHead","aci",rep["acI"]);
+        setItemtoMetricsCompare("apicHead","apic",rep["apIC"]);
+
+
+        rep=ADbC(tNodes,tEdges);
+        setItemtoMetricsCompare("adbcHead","adbc",rep);
+
+
+        counter++;
+    }
+
+
 }
 
+
+function setItemtoMetricsCompare(parent,child,value) {
+    console.log(parent);
+    var temp2=document.getElementById(parent);
+    var one=document.createElement("div");
+    one.setAttribute("id",child+counter);
+    one.setAttribute("class","cell");
+    one.innerHTML=value;
+    temp2.appendChild(one);
+}
+
+function setItemtoMetricsNormal(parent,child,value) {
+    //alert(flagAgain);
+    if(flagAgain){
+        document.getElementById(child).innerHTML=value;
+
+        return;
+    }
+    console.log(parent);
+    var temp2=document.getElementById(parent);
+    var one=document.createElement("div");
+    one.setAttribute("id",child);
+    one.setAttribute("class","cell");
+    one.innerHTML=value;
+    temp2.appendChild(one);
+}
 
 
 
