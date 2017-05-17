@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="SideMenu.css">
     <link rel="stylesheet" type="text/css" href="bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Source+Sans+Pro:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
     <script src="jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="coreApp.js"></script>
     <script type="text/javascript" src="tabManagment.js"></script>

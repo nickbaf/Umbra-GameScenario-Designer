@@ -1,5 +1,5 @@
-<div id="blackout" style='background-image:url("img/network/someSemiTransparent.png"); display:none;'></div>
-<ul id="topNav">
+<div id="blackout" style='display:none;'></div>
+<ul  class="dark-primary-color" id="topNav">
     <li id="topMenu"><img src="img/network/logoAlpha.png" alt="" align="left"  style="width:25px;height:25px;">Untitled Thesis App</li>
     <li id="projectName">Untitled Project</li>
 </ul>
@@ -12,7 +12,7 @@
     <li><a id="storyModel" href="flowchart.html"><img src="img/network/diamond.png" alt="" align="left" style="width:25px;height:22px;">Story Flow Chart</a></li>
 </ul-->
 <div class="tw-bs">
-    <div class="nav-side-menu">
+    <div class="nav-side-menu text-primary-color">
         <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
         <div class="menu-list">
@@ -30,7 +30,12 @@
 
                 <ul class="sub-menu collapse" id="characterModel">
 
-                    <li id="cOriginal"><a href="#"  class="fa fa-plus" onclick='insertCharName("load");'> Character Model</a></li>
+                    <li id="cOriginal">
+                    <span>
+                        <a  class="fa fa-plus"></a>
+                        <a href="#"  onclick='insertCharName("load");'> Character Model</a>
+                        </span>
+                    </li>
                 </ul>
 
 
@@ -40,7 +45,13 @@
 
 
                 <ul class="sub-menu collapse" id="storyflow">
-                    <li id="sOriginal"><a href="#"  class="fa fa-plus" onclick='insertFlowName("load");'> Story Flow Chart Model</a></li>
+                        <li id="sOriginal">
+                            <span>
+                                <a class="fa fa-plus"></a>
+                            <a href="#"   onclick='insertFlowName("load");'> Story Flow Chart Model</a>
+                                </span>
+                        </li>
+
                 </ul>
 
 
@@ -48,7 +59,12 @@
                     <a href="#"><img src="img/network/mush.png" alt="" align="bottom" style="width:35px;height:28px; padding-left: 3px; padding-right: 3px;">  Metrics <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="metrics">
-                    <li id="compare"><a href="metricsCompared.php"  class="fa fa-check-square-o"> Compare Projects</a></li>
+                    <li id="compare">
+                        <span>
+                            <a class="fa fa-check-square-o ></a>
+                        <a href="metricsCompared.php"  > Compare Projects</a>
+                            </span>
+                    </li>
                 </ul>
 
             </ul>

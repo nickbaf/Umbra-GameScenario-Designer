@@ -1557,6 +1557,7 @@ function openActiveTab(type,name) {
 }
 
 
+
 function aboutBaf(type) {
     if(type=="open") {
         document.getElementById("aboutBBF").style.display = "block";
@@ -1566,5 +1567,9 @@ function aboutBaf(type) {
         document.getElementById('blackout').style.display = 'none';
     }
 }
+
+
+
+
 
 
