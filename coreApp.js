@@ -458,6 +458,9 @@ function init(type) {
     }
 }
 
+/**
+ * TODO delete later.
+ */
 function temp(){
     var nodes=JSON.parse(sessionStorage.getItem("storyDataStory")).nodes;
     var edg=JSON.parse(sessionStorage.getItem("storyDataStory")).edges;
@@ -627,6 +630,7 @@ function draw() {
                 document.getElementById('nodeSaveButton').onclick =saveNodeData.bind(this, data, callback);
                 document.getElementById('nodeCancelButton').onclick = clearPopUp.bind(this, callback);
                 document.getElementById('node-popUp').style.display = 'block';
+                document.getElementById('edge-popUp').style.display = 'none';
 
                // alert(document.getElementById('nodeSaveButton').onclick);
             },
@@ -642,6 +646,8 @@ function draw() {
                 document.getElementById('nodeSaveButton').onclick = saveNodeData.bind(this, data, callback);
                 document.getElementById('nodeCancelButton').onclick = cancelEdit.bind(this, callback);
                 document.getElementById('node-popUp').style.display = 'block';
+                document.getElementById('edge-popUp').style.display = 'none';
+
             },
             addEdge : function(data, callback) {
                /* document.getElementById('edgeOperation').innerHTML = "Add Edge";
@@ -663,6 +669,7 @@ function draw() {
                 document.getElementById('edgeSaveButton').onclick = saveEdgeData.bind(this, data, callback);
                 document.getElementById('edgeCancelButton').onclick = cancelEdit.bind(this, callback);
                 document.getElementById('edge-popUp').style.display = 'block';
+                document.getElementById('node-popUp').style.display = 'none'; //close this
             },
             deleteNode: function(data,callback){ //the data variable contains only the id in data->nodes (array)
                 console.log(data.nodes);
@@ -726,7 +733,7 @@ function draw() {
         var node = network.body.data.nodes.get(nodeid);
         // alert(node.id);
         document.getElementById("properties").style.display = "block";
-        document.getElementById("fileClose").style.display = "block";
+        //document.getElementById("fileClose").style.display = "block"; //x button
         document.getElementById("propertyID").innerHTML = toLabel(node.id);
         document.getElementById("propertyType").innerHTML = node.type;
         document.getElementById("propertyPhase").innerHTML = node.narrative;
@@ -734,6 +741,10 @@ function draw() {
         //display the fork's weight in later version
        // openNav();
     }
+    });
+    network.on("deselectNode" , function (params) {
+        document.getElementById("properties").style.display = "none";
+        document.getElementById("fileClose").style.display = "none";
     });
     if(forkWeights.length>0) {
         network.on("afterDrawing", function (ctx) {
