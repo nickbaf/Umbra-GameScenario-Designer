@@ -720,6 +720,7 @@ position: fixed;
     position: absolute;
     left: 15%;
     z-index: -1;
+    letter-spacing: 2px;
     top: 8%;
     transition-duration: 2s;
 }

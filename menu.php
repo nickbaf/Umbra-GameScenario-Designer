@@ -61,7 +61,7 @@
                 <ul class="sub-menu collapse" id="metrics">
                     <li id="compare">
                         <span>
-                            <a class="fa fa-check-square-o ></a>
+                            <a class="fa fa-check-square-o" ></a>
                         <a href="metricsCompared.php"  > Compare Projects</a>
                             </span>
                     </li>

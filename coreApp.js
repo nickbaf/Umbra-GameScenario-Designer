@@ -231,6 +231,7 @@ function charDraw() {
                     }
                 }
                 saveCharStorage();
+                priceTable(1);
                 console.log(JSON.stringify(cNodes));
             },
             deleteEdge: function (data,callback) {
@@ -242,6 +243,7 @@ function charDraw() {
                     }
                 }
                 saveCharStorage();
+                priceTable(1);
                 console.log(JSON.stringify(cEdges));
             }
 
@@ -348,6 +350,7 @@ function saveCharNodeData(data, callback) {
     }
     cNodes.push(data);
     saveCharStorage();
+    priceTable(1);
     console.log(JSON.stringify(cNodes));
     console.log('@@@@@@@@@@');
     console.log('########');
@@ -382,6 +385,7 @@ function saveCharEdgeData(data, callback) {
         cEdges.push(data);
     }
     saveCharStorage();
+    priceTable(1);
     console.log(JSON.stringify(cEdges));
     console.log('@@@@@@@@@@');
     console.log('########');
@@ -692,6 +696,7 @@ function draw() {
                 saveStorage();
                 console.log(JSON.stringify(nodes));
                 console.log("After="+network.body.data.edges.length);
+                priceTable(2);
             },
             deleteEdge: function (data,callback) { //the data vairable contains the id data.edges [0]
                 console.log("Previous"+edges.length);
@@ -894,10 +899,12 @@ function saveNodeData(data, callback) {
         }
     }
     nodes.push(data);
+    priceTable(2);
     saveStorage();
     console.log(JSON.stringify(nodes));
     console.log('@@@@@@@@@@');
     console.log('########');
+
 }
 /**
  * Function for saving a story's flow chart edge
@@ -984,7 +991,7 @@ function computeMetrics() {
     setItemtoMetricsNormal("aciHead","aci",rep["acI"]);
     setItemtoMetricsNormal("apicHead","apic",rep["apIC"]);
         document.getElementById("projectName").innerHTML+="  ---   Metrics for "+sessionStorage.getItem("metricName");
-        document.getElementById("metricsTitle").innerHTML="Metrics for "+sessionStorage.getItem("metricName");
+       // document.getElementById("metricsTitle").innerHTML="Metrics for "+sessionStorage.getItem("metricName");
 
 
         rep=ADbC(nodes,edges);
@@ -1054,7 +1061,7 @@ var counter=0;
 function compareMetrics() {
     document.getElementsByClassName("wrapper")[0].style.position="absolute";
     document.getElementsByClassName("wrapper")[0].style.zIndex="-1";
-    document.getElementsByClassName("wrapper")[0].style.width="100%";
+    //document.getElementsByClassName("wrapper")[0].style.width="100%";
     var doc=document.getElementsByClassName("header");
     var models=JSON.parse(sessionStorage.getItem("storyModels"));
     for(var l=0;l<doc.length;l++){
@@ -1426,27 +1433,31 @@ function openNav() {
 
 
         var transitionEvent = whichTransitionEvent();
-        transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event);
-        function event() {
+        transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent,event1);
+        function event1() {
             try {
                 var rep = ccf(cNodes,cEdges);
                 document.getElementById("pricing-table").style.display = "block";
                 var temp=document.getElementById("h3actions");
                 document.getElementById("h3actions").innerText="Characters Coupling Factor-CCF";
                 var el = document.createElement("span");
-                el.setAttribute("id","actions");
+                var el2= document.createElement("div");
+                el2.setAttribute("id","actions");
+                el.appendChild(el2);
                 temp.appendChild(el);
                 document.getElementById("actions").innerHTML=rep;
                 var temp=document.getElementById("h3choices");
                 document.getElementById("h3choices").innerHTML = "Number of Characters <br></br>";
                 var el = document.createElement("span");
-                el.setAttribute("id","choices");
+                var el2= document.createElement("div");
+                el2.setAttribute("id","choices");
+                el.appendChild(el2);
                 temp.appendChild(el);
                 document.getElementById("choices").innerHTML=cNodes.length;
             }catch (e){alert(e)
                  };
             document.getElementById("mySidenav").removeEventListener(transitionEvent,event);
-        };
+        }
 
     }else {
 
@@ -1470,8 +1481,8 @@ function openNav() {
         }
 
         var transitionEvent = whichTransitionEvent();
-        transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent, event);
-        function event() {
+        transitionEvent && document.getElementById("mySidenav").addEventListener(transitionEvent, event2);
+        function event2() {
             try {
                 var rep = numberOfMetrics(nodes);
 
@@ -1481,12 +1492,51 @@ function openNav() {
                 document.getElementById("actions").innerHTML = rep["noA"];
             } catch (e) {
             }
-            ;
+
             document.getElementById("mySidenav").removeEventListener(transitionEvent, event);
         };
     }
 
     document.getElementById("mySidenav").style.width = "450px";
+
+}
+
+
+function priceTable(mode) {
+    if(mode==1){ //character model
+        try {
+            var rep = ccf(cNodes,cEdges);
+            document.getElementById("pricing-table").style.display = "block";
+            var temp=document.getElementById("h3actions");
+            document.getElementById("h3actions").innerText="Characters Coupling Factor-CCF";
+            var el = document.createElement("span");
+            var el2= document.createElement("div");
+            el2.setAttribute("id","actions");
+            el.appendChild(el2);
+            temp.appendChild(el);
+            document.getElementById("actions").innerHTML=rep;
+            var temp=document.getElementById("h3choices");
+            document.getElementById("h3choices").innerHTML = "Number of Characters <br></br>";
+            var el = document.createElement("span");
+            var el2= document.createElement("div");
+            el2.setAttribute("id","choices");
+            el.appendChild(el2);
+            temp.appendChild(el);
+            document.getElementById("choices").innerHTML=cNodes.length;
+        }catch (e){alert(e)
+        };
+    }else if(mode==2){ //story flow chart
+        try {
+            var rep = numberOfMetrics(nodes);
+
+            //document.getElementById("pricing-table").style.display = "block";
+            document.getElementById("ends").innerHTML = rep["noE"];
+            document.getElementById("choices").innerHTML = rep["noC"];
+            document.getElementById("actions").innerHTML = rep["noA"];
+        } catch (e) {
+            alert(mode)
+        }
+    }
 
 }
 

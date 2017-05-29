@@ -16,13 +16,14 @@
     <?php include("characterModelpopup.php")?>
     <div id="pricing-table" class="clear">
         <div class="plan" id="most-popular">
-            <h3 id="h3choices">Number of Choices-NoC <span id="choices">NaN</span></h3>
+            <!--TA H3 diaxeirizontai apo js-->
+            <h3 id="h3choices">Number of Choices-NoC <span ><div id="choices">NaN</div></span></h3>
         </div>
         <div class="plan" id="most-popular">
-            <h3 id="h3actions">Number of Actions-NoA <span id="actions">NaN</span></h3>
+            <h3 id="h3actions">Number of Actions-NoA <span ><div id="actions">NaN</div></span></h3>
         </div>
         <div class="plan" id="most-popular">
-            <h3 id="h3ends">Number of Ends-NoE   <br></br><span id="ends">NaN</span></h3>
+            <h3 id="h3ends">Number of Ends-NoE   <br></br><span ><div id="ends">NaN</div></span></h3>
         </div>
     </div>
 </div>

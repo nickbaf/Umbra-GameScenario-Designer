@@ -22,8 +22,6 @@
 </head>
 <body onload="init('compare');" >
 <?php include("menu.php") ?>
-
-<h1 id="metricsTitle" style="position: fixed; bottom: 30%; left: 50%;">Metrics about story ταδε..</h1>
 <!-- HOME SCREEN ASSETS -->
 <!--script>
     var colors = new Array(

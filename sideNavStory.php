@@ -41,7 +41,7 @@
         </div>
 
         <input type="button" value="Fork Weight" onclick="sideWeight();" />
-        <input type="button" value="Download as PDF" onclick="pdfdown();" />
+        <input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" />
         <?php include("flowchartPopup.php")?>
         <div id="pricing-table" class="clear">
             <div class="plan" id="most-popular">
