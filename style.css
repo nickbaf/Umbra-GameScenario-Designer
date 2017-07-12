@@ -783,16 +783,13 @@ position: fixed;
 .camvas2d{
     display: inline-block;
     position: absolute;
-    bottom: 3%;
-    width:20%;
-    height: 35%;
+    bottom: 10%;
+    width:55%;
+    height: 75%;
 }
 
-#chart1{
-    right:2%;
-}
 #chart2{
-    right:30%;
+    right:0.5%;
 }
 
 

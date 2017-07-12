@@ -106,13 +106,6 @@ function choiceMetrics(edges) {
 }
 
 
-function ccf() {
-   // var name=sessionStorage.getItem("metricName");
-    //if(sessionStorage.getItem("charData"+name))
-    //TODO
-
-}
-
 function findWeights(theNodes,theEdges){
     edges=theEdges;
     nodes=theNodes;
@@ -156,7 +149,7 @@ var bug=false;
  */
 function debug(msg) {
     if(bug) {
-        console.log(msg);
+       // console.log(msg);
     }
 
 }
@@ -694,6 +687,7 @@ function ADbC(nodes,edges) {
         sum[i]=0;
         num[i]=0;
     }
+    console.log(costs);
     for(var k=0;k<costs.length;k++){
         sum[choices.indexOf(costs[k]["from"])]+=costs[k]["cost"];
         num[choices.indexOf(costs[k]["from"])]+=1;
@@ -701,6 +695,8 @@ function ADbC(nodes,edges) {
       //  sum[costs[i].from]
 
     }
+    console.log(sum);
+    console.log(num);
     var finalSum=0;
     for(k=0;k<sum.length;k++){
         if(sum[k]==0 || num[k]==0){
@@ -710,4 +706,203 @@ function ADbC(nodes,edges) {
     }
     //alert(Math.round((sum/noC)*100)/100);
     return Math.round((finalSum/choices.length)*100)/100;
+}
+
+
+/**
+ * Level of Narrative metric consists of all the previous aforementioned metrics in each of the 4 narrative types.
+ */
+
+var noC2;
+function numberOfLevelOfNarrative(nodes) {
+    noC=[0,0,0,0,0];
+    noE=[0,0,0,0,0];
+    noA=[0,0,0,0,0];
+    noG=[0,0,0,0,0];
+    var i;
+    var temp;
+    for(i=0;i<nodes.length;i++){
+        temp=nodes[i];
+        //alert(temp.type);
+        if(temp.type=="Choice"){
+            noC[getNodeNarrative(temp)]++;
+        }else if(temp.type=="Good Ending" || temp.type=="Bad Ending"){
+            noE[getNodeNarrative(temp)]++;
+        }else if(temp.type=="Narrative"){
+            noA[getNodeNarrative(temp)]++;
+        }else if(temp.type=="Goal"){
+            noG[getNodeNarrative(temp)]++;
+        }
+    }
+    noC2=noC;
+    return {noC:noC,noE:noE,noA:noA,noG:noG};
+}
+
+
+function getNodeNarrative(node) {
+    try {
+        if (node.narrative == "Exposition") {
+            return 0;
+        } else if (node.narrative == "Rising Action") {
+            return 1;
+        } else if (node.narrative == "Climax") {
+            return 2;
+        } else if (node.narrative == "Falling Action") {
+            return 3;
+        }
+        else if (node.narrative == "Conclusion") {
+            return 4;
+        }
+    }catch (err){
+        alert("FATAL ERROR ") //TODO
+    }
+
+}
+
+function apheLoN(nodes,edges) {
+    var apHE=[0,0,0,0,0];
+    var total=[0,0,0,0,0];
+    var temp;
+    var i;
+    var nr;
+    for(i=0;i<nodes.length;i++){
+        temp=nodes[i];
+        if(temp.type=="Good Ending"){
+            nr=getNodeNarrative(temp);
+            apHE[nr]+=getDestinationEdges(edges,temp.id);
+            total[nr]++;
+        }
+    }
+    apHE[0]=apHE[0]/total[0];
+    apHE[1]=apHE[1]/total[1];
+    apHE[2]=apHE[2]/total[2];
+    apHE[3]=apHE[3]/total[3];
+    apHE[4]=apHE[4]/total[4];
+    apHE[0]= Math.round(apHE[0]*100)/100
+    apHE[1]= Math.round(apHE[1]*100)/100
+    apHE[2]= Math.round(apHE[2]*100)/100
+    apHE[3]= Math.round(apHE[3]*100)/100
+    apHE[4]= Math.round(apHE[4]*100)/100
+    //alert(apHE);
+    return apHE;
+}
+
+
+function apcLoN(nodes,edges) {
+    var apC=[0,0,0,0,0];
+    var total=[0,0,0,0,0];
+    var temp;
+    var i;
+    for(i=0;i<nodes.length;i++){
+        temp=nodes[i];
+        if(temp.type=="Choice"){
+            nr=getNodeNarrative(temp);
+            apC[nr]+=getStartPointEdges(edges,temp.id);
+            total[nr]++;
+        }
+    }
+    apC[0]=apC[0]/total[0];
+    apC[1]=apC[1]/total[1];
+    apC[2]=apC[2]/total[2];
+    apC[3]=apC[3]/total[3];
+    apC[4]=apC[4]/total[4];
+    apC[0]= Math.round(apC[0]*100)/100;
+    apC[1]= Math.round(apC[1]*100)/100;
+    apC[2]= Math.round(apC[2]*100)/100;
+    apC[3]= Math.round(apC[3]*100)/100;
+    apC[4]= Math.round(apC[4]*100)/100;
+    //alert(apC);
+    return apC;
+}
+
+
+function choiceMetricsLoN(edges) {
+    var w5=[0,0,0,0,0];
+    var apIC=[0,0,0,0,0];
+    var aci=[0,0,0,0,0];
+    for(var i=0;i<wForks.length;i++){
+        aci[getNodeNarrative(wForks[i]["id"])]+=wForks[i]["w"];
+        if(wForks[i]["w"]==5){
+            w5[getNodeNarrative(wForks[i]["id"])]++;
+            apIC[getNodeNarrative(wForks[i]["id"])]+=getStartPointEdges(edges,wForks[i]["id"]);
+        }
+    }
+    var temp1=[0,0,0,0,0];
+    temp1[0]=aci[0]/wForks.length;
+    temp1[1]=aci[1]/wForks.length;
+    temp1[2]=aci[2]/wForks.length;
+    temp1[3]=aci[3]/wForks.length;
+    temp1[4]=aci[4]/wForks.length;
+    var temp2=[0,0,0,0,0]
+    temp2[0]=apIC[0]/w5;
+    temp2[1]=apIC[1]/w5;
+    temp2[2]=apIC[2]/w5;
+    temp2[3]=apIC[3]/w5;
+    temp2[4]=apIC[4]/w5;
+
+
+    temp1[0]=Math.round(temp1[0]*100)/100;
+    temp1[1]=Math.round(temp1[1]*100)/100;
+    temp1[2]=Math.round(temp1[2]*100)/100;
+    temp1[3]=Math.round(temp1[3]*100)/100;
+    temp1[4]=Math.round(temp1[4]*100)/100;
+
+    temp2[0]=Math.round(temp2[0]*100)/100;
+    temp2[1]=Math.round(temp2[1]*100)/100;
+    temp2[2]=Math.round(temp2[2]*100)/100;
+    temp2[3]=Math.round(temp2[3]*100)/100;
+    temp2[4]=Math.round(temp2[4]*100)/100;
+
+    return{acI:temp1,apIC:temp2,niC:w5}
+}
+
+function ADbCLoN(nodes,edges) {
+    var costs=findCost(nodes,edges);
+    var ret=[0,0,0,0,0];
+    for(var i=0;i<choices.length;i++){
+        sum[i]=0;
+        num[i]=0;
+        ret[getNodeNarrative(choices[i])]++;
+    }
+    console.log(noC2[0]);
+    for(i=0;i<nodes.length;i++){
+        ret[getNodeNarrative(nodes[i])]++;
+    }
+    for(var k=0;k<costs.length;k++){
+        sum[choices.indexOf(costs[k]["from"])]+=costs[k]["cost"];
+        num[choices.indexOf(costs[k]["from"])]+=1;
+        //sum+=costs[k]["cost"];
+        //  sum[costs[i].from]
+
+    }
+    var finalSum=[0,0,0,0,0];
+   // alert(sum.length+" "+num.length+" "+nodes.length);
+    for(k=0;k<sum.length;k++){
+        if(sum[k]==0 || num[k]==0){
+            continue;
+        }
+        for(var j=0;j<nodes.length;j++){
+
+            if(nodes[j].id==choices[k]){
+                //alert(nodes[j].id+" "+costs[k]["from"]);
+                console.log(getNodeNarrative(nodes[j]));
+                finalSum[getNodeNarrative(nodes[j])]+=sum[k]/num[k];
+            }
+        }
+
+    }
+    finalSum[0]=finalSum[0]/noC2[0];
+    finalSum[1]=finalSum[1]/noC2[1];
+    finalSum[2]=finalSum[2]/noC2[2];
+    finalSum[3]=finalSum[3]/noC2[3];
+    finalSum[4]=finalSum[4]/noC2[4];
+
+    finalSum[0]=Math.round(finalSum[0]*100)/100;
+    finalSum[1]=Math.round(finalSum[1]*100)/100;
+    finalSum[2]=Math.round(finalSum[2]*100)/100;
+    finalSum[3]=Math.round(finalSum[3]*100)/100;
+    //finalSum[4]=Math.round(finalSum[4]*100)/100;
+    finalSum[4]=0;
+
+    return finalSum;
 }

@@ -973,7 +973,7 @@ function computeMetrics() {
         document.getElementById("noe2").innerHTML = rep["noE"];
         document.getElementById("noc3").innerHTML = rep["noC"];
         document.getElementById("noa2").innerHTML = rep["noA"];*/
-        rep = aphe(nodes, edges);
+        rep = aphe(nodes,edges);
     setItemtoMetricsNormal("apheHead","aphe",rep["apHE"]);
         //document.getElementById("aphe").innerHTML = rep["apHE"];
 
@@ -1004,48 +1004,77 @@ function computeMetrics() {
     }*/
 
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        options:{
-            maintainAspectRatio: false
-        },
-        data: {
-            labels: ["Exposition","Rising Action","Climax","Falling Action"],
-            datasets: [{
-                label: 'Endings',
-                data: [12, 19, 3, 17],
-                backgroundColor: "rgba(153,255,51,0.6)"
-            }, {
-                label: 'Choices',
-                data: [2, 29, 5, 5],
-                backgroundColor: "rgba(255,153,0,0.6)"
-            }]
-        }
-    });
 
 
+   /* LEVEL OF NARRATIVE*/
+    var rep=numberOfLevelOfNarrative(nodes);
+    var repAPHE=apheLoN(nodes,edges);
+    var repapC=apcLoN(nodes,edges);
+    var repChoiceMetrics=choiceMetricsLoN(edges);
+    var repADbC=ADbCLoN(nodes,edges);
     var ctx = document.getElementById('myChart2').getContext('2d');
+    Chart.defaults.global.animation.duration=3000;
+    Chart.defaults.global.animation.easing='easeInOutCubic';
     var myChart = new Chart(ctx, {
         type: 'bar',
         options:{
             maintainAspectRatio: false,
             title: {
                 display: true,
-                text: 'Custom Chart Title'
+                text: 'Level of Narrative'
             }
         },
         data: {
-            labels: ["Exposition","Rising Action","Climax","Falling Action"],
+            labels: ["Exposition","Rising Action","Climax","Falling Action","Conclusion"],
             datasets: [{
-                label: 'Endings',
-                data: [12, 19, 3, 17],
-                backgroundColor: "rgba(153,255,51,0.6)"
+                label: 'NoA',
+                data: rep["noA"],
+                backgroundColor: "rgba(44,37,133,0.8)"
             }, {
-                label: 'Choices',
-                data: [2, 29, 5, 5],
-                backgroundColor: "rgba(255,153,0,0.6)"
-            }]
+                label: 'NoC',
+                data: rep["noC"],
+                backgroundColor: "rgba(30,162,190,0.8)"
+            },
+                {
+                    label: 'NoE',
+                    data: rep["noE"],
+                    backgroundColor: "rgba(21,162,67,0.8)"
+                },
+
+                {
+                    label: 'NoG',
+                    data: rep["noG"],
+                    backgroundColor: "rgba(251,233,66,0.8)"
+                },
+                {
+                    label: 'NIC',
+                    data: repChoiceMetrics["niC"],
+                    backgroundColor: "rgba(250,186,35,0.6)"
+                },
+                {
+                    label: 'ACI',
+                    data: repChoiceMetrics["acI"],
+                    backgroundColor: "rgba(241,127,39,0.8)"
+                },
+                {
+                    label: 'APIC',
+                    data: repChoiceMetrics["apIC"],
+                    backgroundColor: "rgba(233,73,38,0.8)"
+                },
+                {
+                    label: 'APHE',
+                    data: repAPHE,
+                    backgroundColor: "rgba(220,0,35,0.8)"
+                },
+                {
+                    label: 'APC',
+                    data: repapC,
+                    backgroundColor: "rgba(165,0,117,0.8)"
+                },{
+                    label: 'ADbC',
+                    data: repADbC,
+                    backgroundColor: "rgba(122,24,126,0.8)"
+                }]
         }
     });
 

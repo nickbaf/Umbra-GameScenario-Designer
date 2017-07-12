@@ -31,6 +31,7 @@
                     <option value="Rising Action">Rising Action</option>
                     <option value="Climax">Climax</option>
                     <option value="Falling Action">Falling Action</option>
+                    <option value="Conclusion">Conclusion</option>
                 </select>
             </td>
         </tr>

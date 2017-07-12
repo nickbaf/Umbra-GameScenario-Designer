@@ -199,10 +199,6 @@
 </table-->
 
 
-<div id="chart1" class="camvas2d">
-    <canvas id="myChart"></canvas>
-
-</div>
     <div id="chart2" class="camvas2d">
         <canvas id="myChart2"></canvas>
 
