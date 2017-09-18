@@ -31,9 +31,9 @@ include("menu.php") ?>
 
 
 <div id="charactermodel"></div>
-
+<!--?php include("characterModelpopup.php")?!-->
 <?php include("sideNavChar.php") ?>
-
+<?php include("about.php") ?>
 <div class="namesPane" id="newCharPane">
     <span>New Character Model Name</span>
     <br>

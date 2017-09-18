@@ -2,6 +2,7 @@
 <ul  class="dark-primary-color" id="topNav">
     <li id="topMenu"><img src="img/network/logoAlpha.png" alt="" align="left"  style="width:25px;height:25px;">Untitled Thesis App</li>
     <li id="projectName">Untitled Project</li>
+    <li id="tooltipSideNav" style="display:none">Customizer -></li>
 </ul>
 
 <!-- MENU BAR -->

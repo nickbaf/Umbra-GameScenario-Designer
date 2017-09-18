@@ -8,7 +8,7 @@
         <div class="line-separator"></div>
         <span><a href="#" onclick="aboutBaf('open');" style=" cursor: help;">About</a>
         <a href="#">Network Physics</a>
-        <a href="#">Other info (TBD)</a>
+        <a onclick="deleteTab();" id="tabDel" style="cursor:pointer;">Delete</a>
             </span>
         <br>
         <div id="properties" style="display: none">
@@ -40,8 +40,8 @@
 
         </div>
 
-        <input type="button" value="Fork Weight" onclick="sideWeight();" />
-        <input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" />
+        <input type="button" value="Fork Weight(Debug Only)" onclick="sideWeight();" />
+        <!--input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" /-->
         <?php include("flowchartPopup.php")?>
         <div id="pricing-table" class="clear">
             <div class="plan" id="most-popular">

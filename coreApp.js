@@ -83,6 +83,7 @@ reader.onload = function(e) {
         sessionStorage.setItem("metrics", JSON.stringify(metrics));
         sessionStorage.setItem("ProjectTitle", storage[step]);
         mainTab();
+        alert("Load Successful");
         window.location.reload();
     }catch(err){
         alert(err+"\nin file handling function");
@@ -140,7 +141,7 @@ function charDraw() {
                 springLength: 350,
                 springConstant: 0.14,
                 damping: 0.09,
-                avoidOverlap: 1,
+                avoidOverlap: 0.5,
             }
 
         },
@@ -174,8 +175,8 @@ function charDraw() {
                 document.getElementById('nodeSaveButton').onclick = saveCharNodeData.bind(this, data, callback);
                 document.getElementById('nodeCancelButton').onclick = clearPopUp.bind(this);
                 document.getElementById('node-popUp').style.display = 'block';
-                document.getElementById('node-popUp').style.top = screen.height;
-                document.getElementById('node-popUp').style.left = screen.width;
+                //document.getElementById('node-popUp').style.top = screen.height;
+                //document.getElementById('node-popUp').style.left = screen.width;
             },
             editNode : function(data, callback) {
                 // filling in the popup DOM elements
@@ -189,6 +190,7 @@ function charDraw() {
                 document.getElementById('node-popUp').style.display = 'block';
             },
             addEdge : function(data, callback) {
+                openNav();
                 document.getElementById('edgeOperation').innerHTML = "Add Edge";
                 document.getElementById('edge-id').value = data.id;
                 document.getElementById('edge-label').value = data.label;
@@ -348,6 +350,10 @@ function saveCharNodeData(data, callback) {
             cNodes.splice(i,1);
         }
     }
+    /*for(var j=0;j<150;j++) { create multiple char nodes
+        data.id=j;
+        cNodes.push(JSON.parse(JSON.stringify(data)));
+    }*/
     cNodes.push(data);
     saveCharStorage();
     priceTable(1);
@@ -406,6 +412,8 @@ function init(type) {
      * if a character model tab is selected, open the tab and the write the rest of the character model tabs
      * as active so if the user choses one the page wont be refreshed.Then write as normal the rest of the story tabs
      */
+    //closeNav();
+
     if(type=="char"){
         writeActiveTabs("char");
         writeTabs("story");
@@ -460,6 +468,7 @@ function init(type) {
         document.getElementById("metrics").setAttribute("aria-expanded",true);
         compareMetrics();
     }
+
 }
 
 /**
@@ -1438,10 +1447,11 @@ function ultimaLoad() {
  * Functions that hadles the right side menu.
  */
 function openNav() {
+    document.getElementById("tooltipSideNav").style.display="none";
     /* From Modernizr */
     document.getElementById("spanNav").style.display="none";
     if(window.location.href.search("charactermodel")>0){ //CharacterModel
-        document.getElementById("tabDel").value="Delete "+sessionStorage.getItem("modelName");
+        document.getElementById("tabDel").innerHTML="Delete "+sessionStorage.getItem("modelName");
         function whichTransitionEvent(){
             var t;
             var el = document.createElement('fakeelement');
@@ -1491,7 +1501,7 @@ function openNav() {
     }else {
 
 
-        document.getElementById("tabDel").value = "Delete " + sessionStorage.getItem("storyName");
+        document.getElementById("tabDel").innerHTML = "Delete " + sessionStorage.getItem("storyName");
         function whichTransitionEvent() {
             var t;
             var el = document.createElement('fakeelement');
@@ -1577,6 +1587,7 @@ function closeInfo(){
     document.getElementById("fileClose").style.display = "none";
 }
 function closeNav() {
+    document.getElementById("tooltipSideNav").style.display="block";
     document.getElementById("spanNav").style.display="block";
     document.getElementById("pricing-table").style.display="none";
     try {
@@ -1595,8 +1606,10 @@ function closeNav() {
  * @param name the name of the model that is gonna be loaded.
  */
 function openActiveTab(type,name) {
+
     //it is a char model that we want to open
     if(type=="char"){
+        closeNav();
         document.getElementById("char"+sessionStorage.getItem("modelName")).className="";
         sessionStorage.setItem("modelName",name);
         document.getElementById("projectName").innerHTML=sessionStorage.getItem("ProjectTitle"); //put char model here
@@ -1607,6 +1620,7 @@ function openActiveTab(type,name) {
         charDraw();
     }//it is a story flowchart that we want to open
     else if(type=="story"){
+        closeNav();
         document.getElementById("story"+sessionStorage.getItem("storyName")).className="";
         sessionStorage.setItem("storyName",name);
         document.getElementById("projectName").innerHTML=sessionStorage.getItem("ProjectTitle"); //put char model here
