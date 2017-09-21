@@ -28,9 +28,9 @@
 <h1>Welcome to Untitled Thesis Web Application</h1>
 
 <div id="buttons">
-    <button class="button  save" id="saveData" onclick="ultimaSave();" href="#" ><span>Save Project</span></button>
+    <button class="button  save" id="saveData" onclick="sevaga();" href="#" ><span>Save Project</span></button>
     <button class="button  arrow2" id="newData" onclick='insertName("load");'><span>New Story Project</span></button>
-    <button class="button  load" type="file"  class="button" id="loadData" onclick="ultimaLoad();"><span> Load Project</span></button>
+    <button class="button  load" type="file"  class="button" id="loadData" onclick="loadaga();"><span> Load Project</span></button>
     <input type="file" id="upload" />
 </div>
 <div class="namesPane" id="newProjectPane">

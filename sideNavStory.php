@@ -1,14 +1,14 @@
-<span id="spanNav" style="font-size:20px;position:absolute;top:10px;right:25px;cursor:pointer" onclick="openNav()">
-        <img src="img/network/gear.png" alt="" align="left"  style="width:35px;height:35px;"></span>
+<span id="spanNav" style="cursor:pointer" onclick="openNav()">
+        <!--img src="img/network/gear.png" alt="" align="left"  style="width:35px;height:35px;"--></span>
 
     <div id="mySidenav" class="sidenav">
-        <p class="sidenavTitle" id="title">Customizer</p>
-        <p class="sidenavTitle" id="sidetitle">Customize and view your Network prefrences</p>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="line-separator"></div>
-        <span><a href="#" onclick="aboutBaf('open');" style=" cursor: help;">About</a>
-        <a href="#">Network Physics</a>
-        <a onclick="deleteTab();" id="tabDel" style="cursor:pointer;">Delete</a>
+        <!--p class="sidenavTitle" id="title">Customizer</p>
+        <p class="sidenavTitle" id="sidetitle">Customize and view your Network prefrences</p-->
+        <!--a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a-->
+        <!--div class="line-separator"></div-->
+        <span id="listspan"><a href="#" onclick="aboutBaf('open');" style=" cursor: help;">About</a>
+        <a id="metricsButton" onclick="clickMetrics();" style="cursor:pointer;" >Metrics</a>
+        <a onclick="deleteTab();" id="tabDel" style="color:#ff0003; cursor:pointer;">Delete</a>
             </span>
         <br>
         <div id="properties" style="display: none">
@@ -42,7 +42,7 @@
 
         <input type="button" value="Fork Weight(Debug Only)" onclick="sideWeight();" />
         <!--input type="button" value="Delete Tab" onclick="deleteTab();" id="tabDel" /-->
-        <?php include("flowchartPopup.php")?>
+        <!--?php include("flowchartPopup.php")?-->
         <div id="pricing-table" class="clear">
             <div class="plan" id="most-popular">
                 <h3 id="h3choices">Number of Choices-NoC <span ><div id="choices">NaN</div></span></h3>

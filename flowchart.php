@@ -36,7 +36,7 @@ include("menu.php") ?>
 
 
 <div id="storychart"></div>
-<!--?php include("flowchartPopup.php")?!-->
+<?php include("flowchartPopup.php")?>
 
 <?php include("about.php") ?>
     <div class="namesPane" id="newCharPane">

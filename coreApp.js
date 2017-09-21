@@ -29,6 +29,7 @@ var metrics=[];
 var reader = new FileReader();
 var forkWeights=[];
 
+
 /**
  * Function that handles uploaded file
  * @param e the file
@@ -290,7 +291,8 @@ function charDraw() {
 
 
     });
-
+    openNav();
+    priceTable(1);
 
 }
 /**
@@ -786,6 +788,8 @@ function draw() {
 
         });
     }
+    openNav();
+    priceTable(2);
 }
 /**
  * Function for saving a story's flow chart node
@@ -1398,7 +1402,7 @@ function insertFlowName(type) { //YOU HAVE TO DO THIS S*** WITH PHP SOMETIME
  * Function for saving the hole project to file
  * the file structure is as described in the reader.onload
  */
-function ultimaSave() {
+function sevaga() {
     var storage=[];
     var c=JSON.parse(sessionStorage.getItem("charModels")); //charModels is a stringified array
     var s=JSON.parse(sessionStorage.getItem("storyModels"));
@@ -1439,7 +1443,7 @@ function ultimaSave() {
 /**
  * Function that has the hard work of clicking the upload element for the file handling to start. :P
  */
-function ultimaLoad() {
+function loadaga() {
     document.getElementById("upload").click();
 }
 
@@ -1449,9 +1453,10 @@ function ultimaLoad() {
 function openNav() {
     document.getElementById("tooltipSideNav").style.display="none";
     /* From Modernizr */
-    document.getElementById("spanNav").style.display="none";
+   // document.getElementById("spanNav").style.display="none";
     if(window.location.href.search("charactermodel")>0){ //CharacterModel
         document.getElementById("tabDel").innerHTML="Delete "+sessionStorage.getItem("modelName");
+      //  document.getElementById("metricsButton").innerHTML="Metrics for "+sessionStorage.getItem("modelName");
         function whichTransitionEvent(){
             var t;
             var el = document.createElement('fakeelement');
@@ -1502,6 +1507,7 @@ function openNav() {
 
 
         document.getElementById("tabDel").innerHTML = "Delete " + sessionStorage.getItem("storyName");
+        document.getElementById("metricsButton").innerHTML="Metrics for "+sessionStorage.getItem("storyName");
         function whichTransitionEvent() {
             var t;
             var el = document.createElement('fakeelement');
@@ -1536,7 +1542,9 @@ function openNav() {
         };
     }
 
-    document.getElementById("mySidenav").style.width = "450px";
+    //document.getElementById("mySidenav").style.width = "450px";
+    document.getElementById("pricing-table").style.display="block";
+    document.getElementById("mySidenav").style.width = "10%";
 
 }
 
@@ -1649,8 +1657,14 @@ function openActiveTab(type,name) {
 
 }
 
+function clickMetrics()
+{
 
 
+
+    sessionStorage.setItem("metricName", sessionStorage.getItem("storyName")); //sets the variable in order to open the correct model
+    window.location = "metrics.php"; //redirects user
+}
 function aboutBaf(type) {
     if(type=="open") {
         document.getElementById("aboutBBF").style.display = "block";
