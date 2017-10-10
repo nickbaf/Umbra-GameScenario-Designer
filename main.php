@@ -14,7 +14,7 @@
     <!-Side menu icons-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="img/network/favicon.png"/>
-    <title>Umbra: Game Scenario Designer</title>
+    <title>Umbra: The Game Scenario Designer</title>
 
 
 </head>
@@ -25,7 +25,7 @@
 <!-- HOME SCREEN ASSETS -->
 
 
-<h1>Umbra: Game Scenario Designer </h1>
+<h1>Umbra: The Game Scenario Designer</h1>
 
 <div id="buttons">
     <button class="button  save" id="saveData" onclick="sevaga();" href="#" ><span>Save Project</span></button>
