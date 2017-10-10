@@ -8,7 +8,7 @@
     <!--div class="line-separator"></div-->
     <span><a href="#" onclick="aboutBaf('open');" style=" cursor: help;">About</a>
     <a id="metricsButton" href="#">Network Physics</a>
-    <a onclick="deleteTab();" id="tabDel" style="cursor:pointer;">Delete</a>
+    <a onclick="deleteTab();" id="tabDel" style="color:#ff0003; cursor:pointer;">Delete</a>
         </span>
     <br>
 

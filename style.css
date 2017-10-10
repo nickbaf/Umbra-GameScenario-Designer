@@ -49,8 +49,9 @@ body{
 
     color: white;
     letter-spacing: 2px;
-    font-family: 'Gloria Hallelujah', cursive;
-    font-size:100%;
+    font-family: 'Bangers', cursive;
+    font-size: 2em;
+    letter-spacing: 4px;
     text-decoration: none;
     padding-bottom: 5px;
     padding-right: 1px;
@@ -182,7 +183,8 @@ h1{
     /*font-family: 'Gloria Hallelujah', cursive;*/
     font-family: 'Bangers', cursive;
 
-    font-size: 3em;
+    font-size: 4em;
+    letter-spacing: 1px;
     text-shadow: 2px 1px rgb(206, 207, 212);
     opacity: 0.7;
     left:30%;

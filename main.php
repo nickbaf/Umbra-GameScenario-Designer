@@ -14,7 +14,7 @@
     <!-Side menu icons-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="img/network/favicon.png"/>
-    <title>Untitled Thesis App</title>
+    <title>Umbra: Game Scenario Designer</title>
 
 
 </head>
@@ -25,7 +25,7 @@
 <!-- HOME SCREEN ASSETS -->
 
 
-<h1>Welcome to Untitled Thesis Web Application</h1>
+<h1>Umbra: Game Scenario Designer </h1>
 
 <div id="buttons">
     <button class="button  save" id="saveData" onclick="sevaga();" href="#" ><span>Save Project</span></button>
@@ -64,8 +64,8 @@
     <input type="button" value="cancel" onclick="insertFlowName('cancel');" id="sFnodeCancelButton" />
 </div>
 <footer>
-    <p>Made by: <br> Nick Baf (Bafatakis)</p>
-    <!--p>Made with <img src="img/network/heart.png" alt="love"  style="width:15px;height:15px;"> by:<br> Nick Baf(Bafatakis) in SKG.</p-->
+    <!--p>Made by: <br> Nick Baf (Bafatakis)</p-->
+    <p>Made with <img src="img/network/heart.png" alt="love"  style="width:15px;height:15px;"> by:<br> Nick Baf(Bafatakis) in SKG.</p>
 </footer>
 </body>
 </html>

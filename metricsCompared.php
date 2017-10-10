@@ -16,7 +16,7 @@
     <!-Side menu icons-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="img/network/favicon.png"/>
-    <title>Untitled Thesis App</title>
+    <title>Umbra: Game Scenario Designer</title>
 
 
 </head>

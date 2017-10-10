@@ -409,7 +409,7 @@ function saveCharEdgeData(data, callback) {
  * @param type -char,the character model tabs.-story,the story tabs
  */
 function init(type) {
-    document.title=sessionStorage.getItem("ProjectTitle")+" Project-UTA App"; //change the tab title
+    document.title=sessionStorage.getItem("ProjectTitle")+" Project-Umbra App"; //change the tab title
     /**
      * if a character model tab is selected, open the tab and the write the rest of the character model tabs
      * as active so if the user choses one the page wont be refreshed.Then write as normal the rest of the story tabs
@@ -1435,7 +1435,7 @@ function sevaga() {
     storage.push(sessionStorage.getItem("ProjectTitle"));
     uriContent = encodeURIComponent(JSON.stringify(storage));
     var link = document.createElement('a'); //create the a element
-    link.download = sessionStorage.getItem("ProjectTitle")+".uta"; //append the dowload file
+    link.download = sessionStorage.getItem("ProjectTitle")+".umbra"; //append the dowload file
     link.href = 'data:,' + uriContent;
     link.click(); //click it and download the file.
 }

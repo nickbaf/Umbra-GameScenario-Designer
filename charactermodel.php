@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="SideMenu.css">
     <link rel="stylesheet" type="text/css" href="bootstrap.css">
     <link rel="shortcut icon" type="image/png" href="img/network/favicon.png"/>
-    <title>New Web Project</title>
+    <title>Umbra: Game Scenario Designer</title>
 
 
 
