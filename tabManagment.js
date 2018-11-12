@@ -200,7 +200,7 @@ function deleteTab() {
             sessionStorage.removeItem("charModels");
             sessionStorage.setItem("charModels", JSON.stringify(names));
             alert("Tab " + name + " deleted...");
-            window.location = "main.php"; //redirects user
+            window.location = "index.php"; //redirects user
         }
         return;
     } else {
@@ -234,7 +234,7 @@ function deleteTab() {
             sessionStorage.removeItem("metrics");
             sessionStorage.setItem("metrics", JSON.stringify(names));
             alert("Tab " + name + " deleted...");
-            window.location = "main.php"; //redirects user
+            window.location = "index.php"; //redirects user
         }
     }
 }
