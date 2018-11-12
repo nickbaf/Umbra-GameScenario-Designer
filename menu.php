@@ -20,7 +20,7 @@
 
             <ul id="menu-content" class="menu-content collapse out">
                 <li id="dashboard">
-                    <a   href="main.php">
+                    <a   href="index.php">
                         <img src="img/network/home.png" alt="" align="bottom" style="width:30px;height:30px; padding-left: 3px;"> Dashboard
                     </a>
                 </li>
