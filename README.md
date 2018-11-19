@@ -1,4 +1,4 @@
-# Umbra-GameScenario-Designer
+# Umbra: The Game Scenario Designer
 
 Umbra is a powerful web platform that provides all the necessary tools for VideoGame Scenario Development. 
 
