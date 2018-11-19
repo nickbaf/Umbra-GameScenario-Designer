@@ -26,7 +26,14 @@
 
 
 <h1>Umbra: The Game Scenario Designer</h1>
-
+<div style="position: fixed;
+    font-family: 'Bangers', cursive;
+    font-size: 2em;
+    letter-spacing: 1px;
+    text-shadow: 2px 1px rgb(206, 207, 212);
+    opacity: 0.7;
+    left: 28%;
+    top: 60%;">Design your own Interactive Game Scenarios and evaluate them.</div>
 <div id="buttons">
     <button class="button  save" id="saveData" onclick="sevaga();" href="#" ><span>Save Project</span></button>
     <button class="button  arrow2" id="newData" onclick='insertName("load");'><span>New Story Project</span></button>

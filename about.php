@@ -23,8 +23,9 @@
 </p>
 <br>
 <h2>Open Source Licenses</h2>
-<p>This programm uses Vis.js under Apache Licence.<br> Uses Chart.js under MIT License </p>
+<p>This programm uses Vis.js under Apache Licence.<br> Uses Chart.js under MIT License <br> All logos used are under the CC v3 license <br> Google fonts are a property of Alphabet Inc.</p>
 <br>
+    <p>Chocobo breeded by Koichi Ishii and Square Soft. 1988</p>
     <br>
 
     <p style="font-size: 130%;">Umbra: Is a messenger dog in <i style="font-size: 132%">Final Fantasy XV. </i> <br>
